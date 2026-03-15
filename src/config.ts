@@ -25,6 +25,9 @@ export const config = {
     maxMessages: 5,
     windowMs: 60_000,
   },
+  scheduler: {
+    cronExpression: process.env.CRON_EXPRESSION ?? '0 6 * * *',
+  },
   paths: {
     knowledgeBase: './knowledge-base',
     trackerFile: './data/tracker.json',

@@ -12,9 +12,9 @@ export function startDailyScheduler(
   categories: Category[],
   tracker: FactTracker,
 ): void {
-  // Every day at 06:00 Europe/Warsaw
-  cron.schedule('0 6 * * *', async () => {
-    logger.info('Daily fact cron triggered');
+  const expression = config.scheduler.cronExpression;
+  cron.schedule(expression, async () => {
+    logger.info({ expression }, 'Daily fact cron triggered');
 
     try {
       const channel = await client.channels.fetch(config.discord.dailyChannelId);
@@ -44,5 +44,5 @@ export function startDailyScheduler(
     timezone: 'Europe/Warsaw',
   });
 
-  logger.info('Daily scheduler started (06:00 Europe/Warsaw)');
+  logger.info({ expression }, 'Daily scheduler started');
 }
