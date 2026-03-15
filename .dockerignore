@@ -1,0 +1,8 @@
+node_modules
+dist
+data
+.env
+.git
+.claude
+*.md
+!knowledge-base/*.md
