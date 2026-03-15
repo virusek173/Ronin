@@ -1,4 +1,5 @@
-.env
 node_modules/
 dist/
-data/
+.env
+data/tracker.json
+*.js.map
