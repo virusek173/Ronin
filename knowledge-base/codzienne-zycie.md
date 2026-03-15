@@ -1,0 +1,27 @@
+# Kategoria: Codzienne życie
+
+- Japonia jest jednym z najbezpieczniejszych krajów na świecie. Ludzie zostawiają laptopy w kawiarniach, żeby zająć miejsce, a zgubiony portfel ma ok. 83% szans na zwrot z całą zawartością.
+- Japończycy odnoszą nawet drobne kwoty znalezione na ulicy na policję. System zgubione-znalezione działa tak sprawnie, że parasolki mają wyższy wskaźnik odzysku niż w większości krajów portfele.
+- W Japonii prawie nie ma koszy na śmieci na ulicy. Po ataku gazem sarin w metrze w 1995 r. usunięto je ze względów bezpieczeństwa, ale japońska kultura segregacji odpadów oznacza, że ludzie po prostu noszą śmieci ze sobą.
+- Japońskie ukłony mają trzy poziomy: 15° = zwykłe powitanie, 30° = szacunek, 45° = głębokie przeprosiny lub wdzięczność. Dla turysty lekki ukłon głowy w zupełności wystarczy.
+- Nie dmuchaj nosa publicznie w Japonii — uważane jest to za obrzydliwe. Pociągaj nosem (tak, to jest odwrotnie niż u nas) lub idź do toalety.
+- Przy kasie w Japonii zobaczysz małą tackę — pieniądze lub kartę kładzie się na niej, nie podaje do ręki kasjerowi. To kwestia higieny i szacunku.
+- Japończycy noszą maseczki nawet poza pandemią — przy przeziębieniu to zwykła uprzejmość wobec innych. Tradycja ta istnieje od dziesięcioleci.
+- Hałas w miejscach publicznych jest źle widziany. Telefon w metrze powinien być na wibracji (manā mōdo = "tryb manier"), a rozmawianie przez telefon w pociągu to duże faux pas.
+- Na schodach ruchomych w Tokio stoisz po lewej stronie (prawa do przechodzenia), ale w Osace jest odwrotnie — stoisz po prawej. Nikt nie wie dlaczego, ale obie strony się z tego nabijają.
+- Kolejki na peronie w Japonii to dzieło sztuki — oznaczenia na podłodze pokazują, gdzie staną drzwi pociągu, a ludzie ustawiają się idealnie w rzędach.
+- Ostatni pociąg (shūden) w Tokio odjeżdża ok. 00:00-00:30. Przegapisz = albo taksówka za grube pieniądze, albo nocleg w manga kissa (kawiarnia z mangą i kabinami do spania).
+- Japonia to kultura zdejmowania butów. Genkan (przedsionek) to strefa przejściowa — zdejmujesz buty w ryokanach, wielu restauracjach, świątyniach, a nawet niektórych klinikach.
+- Największy japońskie faux pas z butami: wyjście z łazienki w toaletowych kapcach i chodzenie w nich po domu. Specjalne kapcie są TYLKO do łazienki — zapamiętaj to.
+- Na tatami chodzi się wyłącznie w skarpetkach lub boso — nawet domowe kapcie się zdejmuje. Tatami jest delikatne i utrzymywane w idealnej czystości.
+- Wybierając się do Japonii, noś buty łatwe do zdejmowania — będziesz je ściągał kilkadziesiąt razy dziennie. Sznurowane buty to koszmar logistyczny.
+- Konbini (7-Eleven, Lawson, FamilyMart) to najlepsi przyjaciele turysty — jedzenie, bankomaty, bilety, druk, Wi-Fi, toalety, odbiór paczek. Działają 24/7 i jest ich ponad 57 000 w kraju.
+- W Japonii jest więcej sanktuariów shinto (ok. 80 000) niż konbini (ok. 57 000). A konbini są dosłownie na każdym rogu.
+- Japońskie automaty vendingowe sprzedają zarówno gorące, jak i zimne napoje — w tej samej maszynie. Zimą gorąca kawa z automatu za 130 jenów to małe błogosławieństwo.
+- Tokio zostało prawie całkowicie zniszczone dwa razy: trzęsienie ziemi w 1923 r. i naloty dywanowe w 1945 r. Dlatego ma zaskakująco mało historycznych budynków jak na tak stare miasto.
+- Tokio to największy obszar metropolitalny na świecie — ok. 37 milionów ludzi. Nie jest jednym miastem, lecz 23 "specjalnymi dzielnicami" (ku), z których każda ma charakter osobnego miasta.
+- W japońskim metrze i pociągach jedzenie jest zabronione — ALE w shinkansenie i pociągach dalekobieżnych jest nie tylko dozwolone, ale wręcz oczekiwane. Kupowanie ekiben na stacji to tradycja.
+- Japońskie fosy zamkowe pełnią dziś zupełnie inną funkcję — fosy Pałacu Cesarskiego w Tokio to popularny 5-kilometrowy szlak joggingowy.
+- Capsule hotel — japoński wynalazek z 1979 r. — to kapsuły wielkości trumny z telewizorem i budzikiem. Powstały dla biznesmenów, którzy przegapili ostatni pociąg (często po wizytach w izakaya).
+- Golden Week (29 kwietnia - 5 maja) to tydzień świąt państwowych, kiedy cała Japonia podróżuje jednocześnie. Tłumy są gigantyczne, ale energia festiwalowa rekompensuje wszystko.
+- Japońskie depato (domy towarowe) mają piwnice pełne jedzenia — depachika to kulinarne raje, gdzie można spróbować wagashi, bento, ciasta i dania z całego świata w jednym miejscu.

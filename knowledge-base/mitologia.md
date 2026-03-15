@@ -1,0 +1,27 @@
+# Kategoria: Mitologia
+
+- Według japońskiej mitologii, Japonia została stworzona przez boską parę Izanagi i Izanami, którzy zanurzyli włócznię w pierwotnym oceanie. Krople spadające z ostrza utworzyły wyspy.
+- Amaterasu — bogini słońca — jest najważniejszym bóstwem shinto i mityczną przodkinią cesarskiej rodziny Japonii. Kiedy schowała się w jaskini, świat pogrążył się w ciemności.
+- Bogowie wyciągnęli Amaterasu z jaskini za pomocą... lustra, tańca i śmiechu. Lustro użyte w tym micie to jedno z Trzech Świętych Skarbów Cesarskich, przechowywane w sanktuarium Ise.
+- Trzy Święte Skarby Cesarskie — lustro (Yata no Kagami), miecz (Kusanagi no Tsurugi) i klejnot (Yasakani no Magatama) — to symbole władzy cesarskiej. Nikt poza cesarzem ich nie widział od wieków.
+- Shinto nie ma założyciela, świętej księgi ani dogmatów. To wiara, że natura jest pełna duchów (kami) — w kamieniach, drzewach, górach, rzekach. Nawet burza to kami.
+- Kami nie są "bogami" w zachodnim sensie — mogą być duchami przodków, siłami natury, a nawet wyjątkowymi ludźmi. W Japonii jest ich dosłownie 8 milionów (yaoyorozu).
+- Lisy (kitsune) w japońskiej mitologii to nadprzyrodzone istoty — mogą przybierać ludzką postać, zwykle pięknej kobiety. Im więcej ogonów (do dziewięciu), tym potężniejszy lis.
+- Posągi lisów przy sanktuariach Inari trzymają w pyskach klucz do spichlerza ryżu, klejnot lub zwój. Lisy są posłańcami Inari — boga ryżu, płodności i biznesu.
+- Tofu to ulubione jedzenie lisów w japońskiej mitologii — dlatego "kitsune udon" to udon z smażonym tofu, a "inari-zushi" to ryż w kieszonkach z tofu.
+- Komainu — lwy-strażnicy przy bramach sanktuariów — zawsze stoją w parze: jeden ma otwartą paszczę ("a"), drugi zamkniętą ("un"). Razem tworzą "a-un" — początek i koniec, jak "alfa i omega".
+- Tanuki (jenot japoński) to mitologiczny psotnik — potrafi zmieniać kształt i oszukiwać ludzi. Posągi tanuki z wielkim brzuchem i butelką sake stoją przed restauracjami i barami na szczęście.
+- Tengu to mityczne istoty z długimi nosami lub ptasimi dziobami, żyjące w górskich lasach. Są mistrzami sztuk walki — według legend to oni nauczyli Minamoto no Yoshitsune walki mieczem.
+- Kappa — wodne stwory z miseczką wody na głowie — są niebezpieczne, ale mają jedną słabość: jeśli ukłonisz się kappie, musi oddać ukłon, woda wyleje się z miseczki i straci moc.
+- Yūrei — japońskie duchy — noszą białe kimona i mają długie czarne włosy zakrywające twarz. Ta estetyka zainspirowała filmy horror jak "Ringu" (The Ring) i "Ju-On" (The Grudge).
+- Oni — japońskie demony — to ogrzyste istoty z rogami, zwykle czerwone lub niebieskie. Na Setsubun (3 lutego) Japończycy rzucają fasolą sojową krzycząc "Oni wa soto!" (Demony precz!).
+- Jizō — małe kamienne posągi w czapeczkach i śliniakach — to opiekun dzieci i podróżników. Stoją często przy drogach i na cmentarzach. Rodzice ubierają je w pamiątce po utraconych dzieciach.
+- Daruma — okrągła laleczka bez oczu — reprezentuje mnicha Bodhidharmę, który medytował tak długo, że stracił kończyny. Malujesz jedno oko stawiając cel, drugie gdy go osiągniesz.
+- Omikuji (papierowe losy ze świątyni) mają gradację od "dai-kichi" (wielkie szczęście) do "dai-kyō" (wielki pech). Zły los zawiązujesz na drucie przy świątyni, żeby go "zostawić" bogom.
+- Moneta 5 jenów (go-en) jest uważana za szczęśliwą, bo wymawia się tak samo jak "dobre połączenie/los". To idealna ofiara w sanktuarium.
+- Shimenawa — święta lina ze słomy ryżowej — oznacza obecność kami. Jedną z największych shimenawa ma sanktuarium Izumo Taisha — waży 5 ton i ma 13 metrów długości.
+- Maneki-neko — "zapraszający kot" z uniesioną łapą — to talizman przynoszący szczęście w biznesie. Lewa łapa przyciąga klientów, prawa pieniądze. Kolor też ma znaczenie: złoty = bogactwo, biały = czystość, czarny = ochrona.
+- W japońskiej mitologii istnieją Siedem Bogów Szczęścia (Shichifukujin), którzy płyną na Takarabune (Statku Skarbów). W Nowy Rok Japończycy kładą pod poduszki obrazek tego statku, żeby mieć szczęśliwe sny.
+- Baku to mityczne stworzenia pożerające koszmary. Jeśli masz zły sen, powiedz "Baku-san, come eat my dream" — i baku zjadł twój koszmar.
+- Raijin (bóg gromu) i Fūjin (bóg wiatru) to jedni z najbardziej rozpoznawalnych japońskich bogów. Ich posągi stoją w bramie Kaminarimon (Brama Gromu) świątyni Sensō-ji w Asakusie.
+- Tsukuyomi — bóg księżyca, brat Amaterasu — jest jednym z najrzadziej wspominanych wielkich bogów shinto. Po kłótni z siostrą dzień i noc zostały rozdzielone na zawsze.

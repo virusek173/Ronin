@@ -1,0 +1,39 @@
+# Kategoria: Historia
+
+- Samurajowie stanowili zaledwie 5-8% populacji Japonii w okresie Edo, ale to oni rządzili krajem przez prawie 700 lat — od XII do XIX wieku.
+- Słowo "samuraj" pochodzi od czasownika "saburau", co znaczy "służyć". Ironicznie — klasa służących stała się klasą rządzących.
+- Samurajowie mieli prawo "kiri-sute gomen" — mogli zabić plebejusza, który okazał im brak szacunku. W praktyce rzadko z tego korzystano, bo wiązało się z biurokracją i dochodzeniem.
+- Kobiety z rodzin samurajskich (onna-bugeisha) też walczyły. Najsłynniejsza to Tomoe Gozen z XII w., opisana jako "wojowniczka warta tysiąca mężczyzn".
+- Klasa samurajska została oficjalnie zniesiona w 1871 r., a w 1876 r. zakazano im noszenia mieczy edyktem Haitōrei. Wielu byłych samurajów zostało biznesmenami i politykami.
+- Bushido — kodeks samurajów — w spisanej formie to w dużej mierze produkt pokojowego okresu Edo. Wcześniejsi samurajowie byli znacznie bardziej pragmatyczni i brutalni.
+- Słynna "Hagakure" (1709-1716), traktat o bushido, zaczyna się od słów: "Odkryłem, że Droga Samuraja to śmierć". Autor nigdy nie walczył w prawdziwej bitwie.
+- Seppuku — rytualne samobójstwo — wymagało asystenta (kaishakunin), który kończył cierpienie jednym cięciem miecza. Bez niego agonia mogła trwać godzinami.
+- Japonia miała trzy wielkie szogunaty. Pierwszy (Kamakura, 1185-1333) powstał po wojnie Genpei — jednej z najkrwawszych wojen domowych w historii Japonii.
+- Legendarny "kamikaze" (boski wiatr) to tajfun, który zniszczył mongolską flotę inwazyjną Kubilaj-chana w 1281 r. Nazwa została potem użyta dla pilotów-samobójców w II wojnie światowej.
+- Za szogunatu Ashikaga (1336-1573) rozkwitła kultura: teatr nō, ogrody zen, ceremonia herbaty, ikebana. Paradoksalnie — to był jeden z najbardziej niestabilnych okresów politycznie.
+- Złoty Pawilon (Kinkaku-ji) i Srebrny Pawilon (Ginkaku-ji) w Kioto pochodzą z okresu szogunatu Ashikaga. Srebrny Pawilon nigdy nie został pokryty srebrem — zabrakło pieniędzy lub celowo go zostawiono bez ozdób.
+- Szogunat Tokugawa (1603-1868) to 265 lat pokoju — najdłuższy nieprzerwany okres pokoju w historii jakiegokolwiek dużego państwa. Cena? Całkowita izolacja kraju.
+- System sankin-kōtai zmuszał feudalnych lordów (daimyō) do mieszkania co drugi rok w Edo. To dlatego Japonia ma tak dobrą sieć dróg — budowali je, żeby dojechać do stolicy.
+- Polityka "sakoku" — seria edyktów izolacyjnych (1633-1639) — zamknęła Japonię na ponad 200 lat. Jedynym otwartym portem była mała sztuczna wyspa Dejima w Nagasaki, gdzie handlowali Holendrzy.
+- Trzech zjednoczycieli Japonii opisuje słynna zagadka o kukułce: Nobunaga — "Zabiję ją", Hideyoshi — "Przekonam ją do śpiewu", Ieyasu — "Poczekam, aż zaśpiewa". Ich charaktery idealnie oddają te odpowiedzi.
+- Oda Nobunaga jako pierwszy w Japonii masowo użył broni palnej w bitwie pod Nagashino (1575), zmieniając oblicze japońskiej wojny na zawsze.
+- Toyotomi Hideyoshi — z chłopa na władcę całej Japonii. Jedyny z trzech zjednoczycieli, który nie pochodził z rodu samurajskiego. Przezywano go "Saru" (małpa) ze względu na wygląd.
+- Bitwa pod Sekigaharą (1600) to największa bitwa w historii Japonii — ponad 160 000 wojowników. Tokugawa Ieyasu wygrał i założył szogunat, który rządził 265 lat.
+- Tokugawa Ieyasu słynął z powiedzenia: "Życie jest jak długa podróż z ciężkim ładunkiem — nie spiesz się". Czekał dekady na swoją szansę i w końcu ją wykorzystał.
+- W 1701 r. 47 samurajów (rōninów) zemściło się za śmierć swojego pana, a potem sami popełnili seppuku. Historia wywołała debatę w całej Japonii: honor vs prawo — co ważniejsze?
+- Historia 47 rōninów to japońska "Iliada" — temat niezliczonych filmów, sztuk kabuki i książek. Ich grób w świątyni Sengaku-ji w Tokio to popularne miejsce pielgrzymek do dziś.
+- Amerykański komandor Perry wpłynął do Japonii "czarnymi okrętami" w 1853 r. i wymusił otwarcie kraju. Japończycy byli w takim szoku, że w ciągu 15 lat obalili szogunat i zaczęli modernizację.
+- Cesarz Japonii to najdłuższa nieprzerwana monarchia na świecie — według tradycji od 660 r. p.n.e., czyli ponad 2600 lat.
+- Zamek Edo (dzisiejszy Pałac Cesarski w Tokio) miał kiedyś najwyższą wieżę zamkową w Japonii (51m). Spłonęła w wielkim pożarze w 1657 r. i nigdy jej nie odbudowano.
+- Kabuki — tradycyjny teatr japoński — założyła kobieta, Izumo no Okuni, ok. 1603 r. Szogunat zakazał kobietom występów w 1629 r. i od tego czasu role kobiece grają mężczyźni (onnagata).
+- Kioto ocalało z nalotów w II wojnie światowej, bo amerykański sekretarz wojny Henry Stimson usunął je z listy celów — cenił jego kulturową wartość. Dzięki temu ma 17 obiektów UNESCO i ponad 2000 świątyń.
+- Hiroszima odrodziła się niezwykle szybko po bombie atomowej — tramwaje wróciły po zaledwie 3 dniach od bombardowania z 6 sierpnia 1945 r.
+- Wielki Budda w Kamakurze (11.3m) stał kiedyś wewnątrz drewnianej świątyni, ale tsunami w 1498 r. zmyło budynek. Od ponad 500 lat siedzi pod gołym niebem.
+- Himeji-jō przetrwał ponad 400 lat — wojny, trzęsienia ziemi i naloty w II wojnie światowej. Bomba zapalająca wpadła na ostatnie piętro, ale nie eksplodowała.
+- Zamek w Osace to beton w środku — został odbudowany w 1931 r. "Prawdziwym" zamkiem jest Himeji, który zachował oryginalną drewnianą konstrukcję.
+- Na Miyajimie (Itsukushima) historycznie nie wolno było się rodzić ani umierać — ciężarne i umierający musieli wracać na ląd. Zasada obowiązywała do 1878 r.
+- Sadako Sasaki, dziewczynka z Hiroszimy, składała żurawie origami wierząc, że 1000 żurawi spełni życzenie wyzdrowienia. Złożyła ponad 1400, ale nie wyzdrowiała. Jej pomnik stoi w Peace Memorial Park.
+- Drewniana brama Yōmeimon w Nikko ma 508 rzeźb. Jedna kolumna jest celowo odwrócona do góry nogami — bo według japońskiego przesądu perfekcja przyciąga zniszczenie.
+- Budowa Tōshō-gū w Nikko pochłonęła 4.54 miliona dniówek roboczych i ponad 2 miliony płatków złota. Tokugawa Ieyasu chciał skromny pochówek, ale wnuk miał inne plany.
+- Daibutsu (Wielki Budda) w Tōdai-ji w Narze budowało 2.6 miliona ludzi — przy populacji Japonii wynoszącej ok. 6 milionów. Inwestycja prawie zbankrutowała kraj.
+- Do 1637 r. zabicie jelenia w Narze karano śmiercią. Jelenie uważane są za boskich posłańców — jest ich tam ok. 1200 i nauczyły się kłaniać, prosząc ludzi o jedzenie.

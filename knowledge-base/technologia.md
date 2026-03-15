@@ -1,0 +1,27 @@
+# Kategoria: Technologia
+
+- Shinkansen (pociąg-pocisk) nigdy nie miał śmiertelnego wypadku operacyjnego od uruchomienia w 1964 r. — ponad 60 lat bezbłędnego działania przy prędkościach do 320 km/h.
+- Średnie opóźnienie shinkansena to mniej niż 1 minuta na kurs. Maszyniści przepraszają za opóźnienia rzędu jednej minuty, a media donoszą o opóźnieniach większych niż 5 minut.
+- Stacja Shinjuku w Tokio to najbardziej ruchliwa stacja kolejowa na świecie — 3.6 miliona pasażerów dziennie, więcej niż cała populacja wielu europejskich stolic. Ma ponad 200 wyjść.
+- Japonia ma ok. 4 miliony automatów vendingowych (jidōhanbaiki) — jeden na mniej niż 30 mieszkańców. Sprzedają wszystko: od gorących napojów przez zupy po jajka i banany.
+- Tokio Tower (333m, 1958) jest o 33 metry wyższa od oryginalnej konstrukcji Wieży Eiffla (300m) — i to celowo. Zbudowano ją z przetopionego złomu czołgów z wojny koreańskiej.
+- Japońskie toalety to cuda techniki — podgrzewana deska, bidet z regulacją, suszarka i dźwięki maskujące zwane "otohime" (księżniczka dźwięku), które puszczają szum wody dla prywatności.
+- "Otohime" wynaleziono, bo japońskie kobiety spuszczały wodę w toalecie dla kamuflażu dźwięków, co marnowało ogromne ilości wody. Elektroniczny zamiennik rozwiązał problem.
+- Yurikamome — kolejka na sztuczną wyspę Odaiba w Tokio — jest w pełni bezobsługowa, bez maszynisty. Siądź z przodu dla najlepszego widoku na Rainbow Bridge i zatokę.
+- Hakone Tozan Railway to najstarsza działająca kolejka górska w Japonii (od 1919 r.). Pociąg wspina się serpentyną i zmienia kierunek jazdy na switchbackach.
+- Suica i Pasmo — karty transportowe w Tokio — działają nie tylko w pociągach, ale też w sklepach, automatach i restauracjach. Jedno dotknięcie i płacisz za wszystko.
+- Japonia ma ponad 6800 wysp, ale kolej łączy główne wyspy podmorskimi tunelami. Seikan Tunnel (53.85 km) łączący Honsiu z Hokkaido był najdłuższym tunelem kolejowym na świecie do otwarcia tunelu pod kanałem La Manche.
+- Super Potato w Akihabarze to kultowy sklep retro gier — 5 pięter z grami od Famicoma po PlayStation. Na dachu jest retro arcade z automatami z lat 80.
+- Pierwsze emoji stworzył Japończyk Shigetaka Kurita w 1999 r. — zaprojektował 176 ikon 12x12 pikseli dla operatora NTT DoCoMo. Dziś emoji to globalny standard komunikacji.
+- Japonia jest światowym liderem w robotyce. ASIMO (Honda), Pepper (SoftBank), AIBO (Sony) — japońskie roboty są projektowane do współżycia z ludźmi, nie do zastępowania ich.
+- Akihabara w Tokio przeszła transformację z powojennego czarnego rynku elektroniki w stolica kultury otaku (anime, manga, gry). Powstała tu, bo blisko stacji był nadmiar części elektronicznych.
+- Gachapon — japońskie automaty z kapsułkami-niespodziankami — to przemysł wart miliardy jenów. W Akihabarze są całe ściany z setkami automatów, a kolekcjonowanie figurek to narodowa pasja.
+- Japońskie konbini (7-Eleven, Lawson, FamilyMart) to technologiczne cudy — bankomaty, druk dokumentów, odbiór paczek, płatności rachunków, Wi-Fi, a do tego świetne jedzenie 24/7.
+- QR kody wynaleziono w Japonii w 1994 r. — firma Denso Wave stworzyła je do śledzenia części samochodowych Toyoty. Dziś używa ich cały świat.
+- Walkman Sony (1979) zrewolucjonizował sposób słuchania muzyki — po raz pierwszy ludzie mogli nosić swoją muzykę ze sobą. Sprzedano ponad 400 milionów sztuk.
+- Japonia testuje pociągi maglev (lewitacja magnetyczna) od lat 70. Prototyp L0 osiągnął prędkość 603 km/h w 2015 r. — rekord światowy. Linia Tokio-Nagoya ma być otwarta w przyszłości.
+- Nintendo powstało w 1889 r. w Kioto jako producent kart do gry hanafuda (karty kwiatowe). Od kart do Game Boya i Switcha — ponad 130 lat innowacji.
+- Japonia jest trzecim największym rynkiem gier wideo na świecie. Arcade (game center) nadal prosperują — w przeciwieństwie do Zachodu, gdzie wymarły w latach 90.
+- Odaiba — sztuczna wyspa w Tokio — miała być "miastem przyszłości" w bańce ekonomicznej lat 80./90. Bańka pękła, ale futurystyczna infrastruktura została i działa do dziś.
+- 20-metrowy robot Gundam przed DiverCity na Odaiba wieczorem "transformuje się" w pokazie świetlnym. To pełnowymiarowa replika robota z kultowego anime.
+- Japońska telewizja NHK rozpoczęła regularne nadawanie w 8K (Super Hi-Vision) w 2018 r. — jako pierwsza stacja na świecie, wyprzedzając resztę planety o lata.

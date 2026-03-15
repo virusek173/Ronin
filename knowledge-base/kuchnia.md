@@ -1,0 +1,36 @@
+# Kategoria: Kuchnia
+
+- Japońska kuchnia (washoku) została wpisana na listę niematerialnego dziedzictwa UNESCO w 2013 r. Opiera się na zasadzie "ichiju sansai" — jedna zupa, trzy dodatki.
+- Smak umami ("piąty smak") został odkryty w Japonii przez chemika Kikunae Ikedę w 1908 r. Znalazł go w bulionie z wodorostów kombu.
+- Wasabi, które dostajesz poza Japonią, to w 99% barwiony chrzan. Prawdziwy wasabi kosztuje ok. 200 zł za korzeń i traci smak po 15 minutach od starcia.
+- Tokio ma więcej restauracji z gwiazdkami Michelin niż jakiekolwiek inne miasto na świecie — więcej niż Paryż, Londyn i Nowy Jork razem wzięte.
+- Japończycy mówią "itadakimasu" przed jedzeniem (dosł. "pokornie przyjmuję") i "gochisōsama" po jedzeniu ("to była uczta"). To podstawowa etykieta.
+- Wbijanie pałeczek pionowo w ryż to ogromne faux pas — tak wygląda ofiara dla zmarłych. To jak postawienie zniczy przy stole.
+- Podawanie jedzenia pałeczkami do pałeczek to jedno z największych japońskich tabu — bo dokładnie tak przekazuje się kości zmarłych po kremacji.
+- Siorbanie ramenu i zupy jest w Japonii nie tylko akceptowane, ale wręcz pożądane. Pokazuje, że smakuje, a poza tym schładza gorący makaron.
+- W Japonii nie zostawia się napiwku — NIGDZIE. To nietakt, który sugeruje, że kelner potrzebuje jałmużny. Mogą nawet pobiec za tobą, żeby oddać pieniądze.
+- Sushi z nigiri je się rybą w dół do sosu sojowego — maczasz rybę, nie ryż. Ryż się rozpada i wchłania za dużo sosu.
+- Omoide Yokochō ("Memory Lane") w Shinjuku to wąskie uliczki z malutkich knajpek yakitori z lat 40. XX w. Drugi, mniej oficjalny przydomek to "Piss Alley".
+- Legendarny Sukiyabashi Jirō w Ginzie — bohater dokumentu "Jiro Dreams of Sushi" — stracił wpis w przewodniku Michelin w 2019 r., bo przestał przyjmować rezerwacje publiczne.
+- Japońskie curry (karē) to comfort food nr 1 w kraju. Jest gęste, słodkawe i nie ma nic wspólnego z indyjskim. Marynarze przywieźli przepis z Wielkiej Brytanii w XIX w.
+- Takoyaki — kulki z ciasta z kawałkiem ośmiornicy — wynaleziono w Osace w 1935 r. Ruchome płatki bonito na wierzchu wyglądają, jakby takoyaki "oddychało".
+- Osaka ma motto "kuidaore" — dosłownie "jedz, aż padniesz". Historycznie było centrum handlowym Japonii z dostępem do najlepszych składników z całego kraju.
+- W dzielnicy Shinsekai w Osace obowiązuje żelazna zasada przy jedzeniu kushikatsu: NIGDY nie maczaj szaszłyka dwa razy w sosie. Znaki przypominające o tym są dosłownie wszędzie.
+- "Kitsune udon" (lis udon) to gruba pszeniczna udon z smażonym tofu. Nazywa się tak, bo tofu to ulubione jedzenie lisów w japońskiej mitologii.
+- Okonomiyaki z Osaki i Hiroszimy to dwa zupełnie różne dania. Osaka-style: wszystko zmieszane. Hiroshima-style: warstwy (ciasto, kapusta, makaron, jajko). Osaczanie i hiroszimczycy toczą o to wieczny spór.
+- Po bombie atomowej food standy z okonomiyaki były jednym z pierwszych biznesów, które wróciły w Hiroszimie.
+- Momiji manjū — ciasteczka w kształcie liścia klonu z Miyajimy — wymyślono ok. 1906 r. Smażona wersja (age-momiji) jest według wielu jeszcze lepsza od klasycznej.
+- Kuro-tamago — czarne jajka z Hakone — są gotowane w wulkanicznych gorących źródłach. Czarny kolor to reakcja siarki ze skorupką. Legenda mówi, że każde zjedzenie przedłuża życie o 5 lat.
+- Hōtō — gęsta zupa z szerokim makaronem i dynią — to specjalność regionu Fuji. Podobno była ulubioną potrawą Takedy Shingena, a jego żołnierze gotowali ją w hełmach.
+- Kanazawa ma jedne z najświeższych owoców morza w Japonii — prosto z Morza Japońskiego. Targ Ōmi-chō działa tam nieprzerwanie od 300 lat.
+- Lody pokryte całym listkiem złota to specjalność Kanazawy, która produkuje ok. 98% japońskiego złota płatkowego. Złoto nie smakuje niczym szczególnym, ale wygląda spektakularnie.
+- Hida-gyu — wołowina z regionu Takayamy — to jeden z najwyżej cenionych gatunków wagyu, porównywalny z Kobe beef, ale tańszy. Sprzedaje się ją nawet jako sushi z surową wołowiną.
+- Kakinoha-zushi z Nary to sushi zawinięte w liść persymony — tradycyjna metoda konserwacji ryb w regionie odciętym od morza. Liście mają właściwości antybakteryjne.
+- Shika senbei (krakersy dla jeleni) w parku Nara kosztują 200 jenów za paczkę. Jelenie nauczyły się kłaniać prosząc o nie — skopiowały zachowanie od ludzi.
+- Kaiseki — wielodaniowy posiłek jak dzieło sztuki — wywodzi się z prostych posiłków przy ceremonii herbaty. Każde danie odzwierciedla porę roku. Ceny zaczynają się od ok. 300-400 zł.
+- Matcha z Uji to chroniona nazwa jak szampan z Champagne. Uji produkuje najlepszą matchę od XIV w. — herbata dotarła tam ok. 1207 r. dzięki mnichowi Myōe.
+- Yatsuhashi — trójkątne ciasteczka mochi z Kioto — to ikoniczny omiyage (prezent z podróży). Tradycja przywożenia smakołyków ze swoich podróży jest w Japonii bardzo silna.
+- Ekiben — pudełka bento sprzedawane na stacjach kolejowych — to osobna kultura. Każda stacja ma unikalne pudełko, a kolekcjonowanie ekiben to popularne hobby.
+- Jedzenie z konbini (7-Eleven, Lawson, FamilyMart) jest zaskakująco dobre. Onigiri, bento i nikuman to solidne i tanie posiłki za ułamek ceny restauracji.
+- Himeji ma swój własny styl oden — z imbirowym sosem sojowym zamiast standardowej musztardy. Idealne comfort food po zwiedzaniu zamku w chłodny dzień.
+- Piwa Hoppy nie da się kupić poza Japonią — to niskoalkoholowe piwo mieszane z shōchū, popularne w tradycyjnych knajpkach izakaya w Asakusie od lat 40.

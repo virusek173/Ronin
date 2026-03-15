@@ -1,0 +1,27 @@
+# Kategoria: Natura
+
+- Góra Fuji (3776m) to najwyższy szczyt Japonii i aktywny wulkan — ostatnia erupcja miała miejsce w 1707 r. Popiół spadł na Edo (Tokio), 100 km dalej.
+- Japończycy mają powiedzenie: "Każdy mądry człowiek wchodzi na Fuji raz, ale tylko głupiec robi to dwa razy". Oficjalny sezon wspinaczkowy trwa od lipca do sierpnia.
+- Japonia leży na "Pacyficznym Pierścieniu Ognia" — ma ponad 100 aktywnych wulkanów i doświadcza ok. 1500 trzęsień ziemi rocznie. Większość jest nieodczuwalna.
+- Japonia składa się z ponad 6800 wysp, ale 97% populacji żyje na czterech głównych: Honsiu, Hokkaido, Kiusiu i Shikoku.
+- Ōwakudani w Hakone to wulkaniczna dolina z parującymi fumarolami — dosłownie "Wielkie Wrzenie". Siarka barwi gotowane tu jajka na czarno.
+- Jezioro Ashi w Hakone powstało w kraterze wulkanu ok. 3000 lat temu. W pogodne dni odbija w swoich wodach górę Fuji — jeden z najbardziej ikonicznych widoków Japonii.
+- Jezioro Chūzenji w Nikko leży na 1269 m n.p.m. i powstało z erupcji wulkanu. Droga do niego — Irohazaka — ma 48 serpentyn, każda oznaczona literą starej japońskiej abecadły.
+- Wodospad Kegon w Nikko ma 97 metrów wysokości. Winda wykuta w skale zjeżdża do punktu widokowego u podstawy — to jeden z najpiękniejszych wodospadów Japonii.
+- Góra Omuro koło Ito to idealnie okrągły wulkan porośnięty trawą — wygląda jak zielona miska. Jest wypalana co roku w lutym (yamayaki) — tradycja od 700 lat.
+- Jogasaki Coast na półwyspie Izu to spektakularne klifowe wybrzeże powstałe z lawy wulkanu Omuro. 9 km szlaku z wiszącymi mostami nad Pacyfikiem.
+- Japonia ma cztery wyraźne pory roku, a każda jest celebrowana kulturowo: sakura wiosną, festiwale latem, kolorowe liście (kōyō) jesienią, śnieg i onseny zimą.
+- W Japonii jest ok. 27 000 gorących źródeł (onsen). Woda ma zwykle 38-44°C i różne kolory zależnie od minerałów — Hakone ma nawet mleczno-białą wodę siarkową.
+- Nara Park jest domem dla ok. 1200 jeleni sika, które chodzą wolno wśród turystów. Jelenie nauczyły się kłaniać prosząc o jedzenie — skopiowały to zachowanie od ludzi.
+- Las Meiji Jingū w Harajuku to 70 hektarów lasu W ŚRODKU Tokio. Jest sztuczny — zasadzony w 1920 r. ze 100 000 drzew podarowanych z całej Japonii. Miał wyglądać jak naturalny za 100 lat — i rzeczywiście, po ponad 100 latach jest prawie nie do odróżnienia od naturalnego.
+- Japońskie makaki (nihonzaru) to najdalej na północ żyjące naczelne (poza człowiekiem). Słynne "snow monkeys" w Nagano kąpią się w gorących źródłach zimą.
+- Brama torii sanktuarium Itsukushima na Miyajimie (16.6m) stoi w morzu — przy przypływie "pływa", przy odpływie można do niej dojść pieszo. Jest "wolnostojąca" — trzyma ją własna waga (ok. 60 ton).
+- Na szczycie góry Misen na Miyajimie płonie "ogień, który nigdy nie zgasł" — zapalone ponad 1200 lat temu przez mnicha Kūkai i od tego czasu nieprzerwanie podtrzymywane.
+- Japonia jest w 67% pokryta lasami — jeden z najwyższych wskaźników wśród krajów rozwiniętych. Mimo to większość populacji żyje na wąskim pasie wybrzeża.
+- Wisteria (fuji/glicynia) w Ashikaga Flower Park to 150-letnie drzewo, którego gałęzie są podparte metalową konstrukcją wielkości boiska do tenisa i wyglądają jak fioletowy wodospad.
+- Kenroku-en w Kanazawie to jeden z "trzech najpiękniejszych ogrodów Japonii". Zimą drewniane konstrukcje yukitsuri (liny chroniące drzewa przed śniegiem) tworzą ikoniczny widok.
+- Shukkeien — ogród w Hiroszimie z 1620 r. — to "skondensowany krajobraz": miniaturowe góry, lasy i doliny zmieszczone w jednym ogrodzie.
+- Shirakawa-go w japońskich Alpach było tak odizolowane w górach, że zachowało tradycje z okresu Edo prawie nienaruszone. Zimą wieczorne iluminacje wioski w śniegu to jeden z najmagiczniejszych widoków Japonii.
+- Dachy domów gassho-zukuri w Shirakawa-go mają kąt 60° — specjalnie zaprojektowane do zsuwania ciężkiego górskiego śniegu. Trzeba je wymieniać co 30-40 lat, a cała wioska pomaga — to tradycja yui.
+- Japonia ma osobne słowo na dźwięk wiatru w bambusach, światło przebijające przez liście drzew (komorebi) i melancholię jesiennego krajobrazu — natura jest głęboko wpleciona w język i kulturę.
+- Fuji ma piękny symetryczny kształt, bo jest stratowulkanem — zbudowanym z warstw lawy i popiołu. Najlepiej widać go zimą i wczesną wiosną, gdy czyste powietrze daje idealną widoczność.

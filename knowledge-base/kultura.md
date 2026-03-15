@@ -1,0 +1,33 @@
+# Kategoria: Kultura
+
+- Japonia ma ponad 300 000 festiwali (matsuri) rocznie — od małych sąsiedzkich po gigantyczne z milionami uczestników. Każde sanktuarium, każde miasto, każda pora roku ma swój festiwal.
+- Mikoshi to przenośne sanktuarium noszone na ramionach podczas festiwali. Idea jest taka, że duch (kami) wyrusza na "inspekcję" swojego terenu — niesiony przez tłum wiernych.
+- Hanami — piknik pod kwitnącą sakurą — to tradycja od VIII w. Firmy wysyłają młodych pracowników rano, żeby zajęli najlepsze miejsca pod drzewami dla reszty zespołu.
+- Sakura symbolizuje ulotność życia (mono no aware) — jest piękna właśnie DLATEGO, że szybko opada. To fundamentalna japońska filozofia estetyczna.
+- Somei Yoshino — najczęstszy gatunek sakury w Japonii — to genetyczny klon. WSZYSTKIE drzewa tego gatunku pochodzą od jednego drzewa z XIX-wiecznego Tokio.
+- Sakura kwitnie tylko 1-2 tygodnie, a pełne kwitnienie (mankai) trwa zaledwie 2-3 dni. Japończycy śledzą "sakura front" — front kwitnienia przesuwający się z południa na północ.
+- Istnieje specjalne słowo na opadające płatki sakury: "sakura fubuki" (śnieżyca sakury). Wielu Japończyków uważa ten moment za piękniejszy niż pełne kwitnienie.
+- Gejsze w Kioto nazywają się "geiko", a uczennice "maiko". W Kioto jest ponad 100 herbaciarni z prawdziwymi geiko, ale wizyta wymaga zaproszenia lub rezerwacji.
+- Kinkaku-ji (Złoty Pawilon) w Kioto został spalony w 1950 r. przez szalonego mnicha. Historia ta stała się tematem powieści Yukio Mishimy "Złoty Pawilon". Obecny budynek to odbudowa z 1955 r.
+- Bambusowy Las Sagano w Arashiyamie jest tak wyjątkowy dźwiękowo, że UNESCO uznało szum wiatru w bambusach za oficjalny "krajobraz dźwiękowy Japonii".
+- Bambus może rosnąć nawet 90 cm dziennie — to jeden z najszybciej rosnących organizmów na świecie. Las w Arashiyamie wygląda inaczej niemal co tydzień.
+- Rickshaw (jinrikisha, dosł. "pojazd napędzany ludzką siłą") wynaleziono w Japonii ok. 1869 r. Wcześniej nie istniały nigdzie na świecie.
+- Fushimi Inari w Kioto ma od 5 000 do 10 000 bram torii — nikt nie policzył dokładnie. Każda brama jest darem od firmy lub osoby prywatnej. Ceny zaczynają się od ok. 12 000 zł za małą bramę.
+- Fushimi Inari zostało założone w 711 r. — jest starsze niż samo Kioto jako stolica (794 r.). Otwarte jest 24/7 i wstęp jest wolny.
+- Takayama Matsuri to jeden z najpiękniejszych festiwali platform w Japonii. 12 yatai (platform paradnych) z XVII-XIX w. to zarejestrowane Ważne Dobra Kulturowe — jak muzea na kółkach.
+- Karakuri — mechaniczne lalki na festiwalowych platformach w Takayamie — wykonują akrobacje poruszane sznurkami. Ta technologia z XVII w. uważana jest za poprzedniczkę japońskiej robotyki.
+- Yabusame — łucznictwo konne w tradycji samurajskiej — wymaga strzelania z łuku na galopie do trzech celów. To jeden z najtrudniejszych sportów na świecie, praktykowany od XII w.
+- Gion Matsuri w Kioto to jeden z trzech największych festiwali w Japonii — trwa cały miesiąc (lipiec). Tradycja sięga 869 r., kiedy festiwal miał odpędzić zarazę.
+- Omikuji to papierowe losy w świątyniach. Wyciągasz losowy papierek z przepowiednią. Zły los? Zawiąż go na drucie przy świątyni, żeby go "zostawić" i odwrócić pecha.
+- Omamori — talizmany ochronne ze świątyń — nie powinno się otwierać, bo tracą moc. Po roku zwraca się je do świątyni i kupuje nowe.
+- Goshuin to kaligrafowane stemple świątynne — nie są zwykłą pamiątką, lecz formą błogosławieństwa. Zeszyt na goshuiny (goshuinchō) to jeden z najpiękniejszych souvenirów z Japonii.
+- Wisteria (glicynia) w Ashikaga Flower Park to 150-letnie drzewo, którego gałęzie rozpościerają się na 1000 m². Wygląda jak z filmu "Avatar".
+- Wisteria z Ashikaga jest często kojarzona z anime "Demon Slayer" (Kimetsu no Yaiba), gdzie glicynia jest trucizną na demony — choć autor nigdy tego oficjalnie nie potwierdził.
+- Yukata — lekkie letnie kimono — to standardowy strój festiwalowy w Japonii. Turystom też wypada je nosić i jest to mile widziane.
+- Kioto ma ponad 2000 świątyń i sanktuariów. Gdybyś odwiedzał jedną dziennie, zajęłoby ci to prawie 6 lat.
+- Ulice Kioto mają układ szachownicy — wzorowane na chińskiej stolicy Chang'an (dziś Xi'an) z VIII w. To jedno z niewielu japońskich miast z logicznym planem ulic.
+- Kiyomizu-dera ("Świątynia Czystej Wody") w Kioto stoi na zboczu góry na drewnianych palach, 13 metrów nad ziemią — i to BEZ użycia gwoździ.
+- Japońskie powiedzenie "skoczyć ze sceny Kiyomizu" oznacza podjąć odważną decyzję. W okresie Edo ludzie naprawdę skakali — 85% przeżyło dzięki gęstym krzewom poniżej.
+- Zamek Nijō w Kioto ma "śpiewające podłogi" (uguisubari) — skrzypią jak ptaki przy każdym kroku, żeby ostrzec przed intruzami. Tu w 1867 r. ostatni szogun zwrócił władzę cesarzowi.
+- Shingen-kō Festival w Kofu to największa parada samurajska na świecie — ponad 1500 uczestników w zbrojach, wpisana do Księgi Rekordów Guinnessa.
+- Tradycyjne wyścigi konne kurabeuma w sanktuarium Kamigamo w Kioto odbywają się nieprzerwanie od 1093 r. Wynik przepowiada jakość zbiorów — to rytuał shinto, nie sport.

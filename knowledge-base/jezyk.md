@@ -1,0 +1,24 @@
+# Kategoria: Język
+
+- Japończycy używają trzech systemów pisma jednocześnie: hiragana (sylabariusz japoński), katakana (sylabariusz dla obcych słów) i kanji (znaki chińskie). Często wszystkie trzy pojawiają się w jednym zdaniu.
+- Japońskie dzieci muszą opanować 1006 kanji w szkole podstawowej i 2136 kanji (lista jōyō) do końca liceum. Dorosły Japończyk zna zwykle 3000-4000 znaków.
+- "Sumimasen" to najważniejsze słowo w Japonii — znaczy jednocześnie "przepraszam", "dziękuję" i "excuse me". Używasz go dosłownie 50 razy dziennie.
+- Japończycy rzadko mówią "nie" wprost. "To trudne..." (chotto...) lub ssanie powietrza przez zęby to uprzejmy sposób powiedzenia "absolutnie nie".
+- Kanji dla Kioto (京都) i Tokio (東京) dzielą jeden znak — 京, który oznacza "stolica". Kioto = "stolica", Tokio = "wschodnia stolica".
+- W japońskim istnieje osobne słowo na "opadające płatki sakury" (sakura fubuki), "światło słoneczne przebijające przez liście" (komorebi) i "kupowanie książek, których nigdy się nie przeczyta" (tsundoku).
+- Japońskie onomatopeje to osobna kategoria językowa. "Pika-pika" = błyszczenie, "doki-doki" = bicie serca, "goro-goro" = leniuchowanie. Pokémon "Pikachu" to połączenie "pika" (błysk) i "chu" (pisk myszy).
+- Japoński ma różne poziomy grzeczności — od casualowego (tameguchi) po bardzo formalny (keigo). Użycie złego poziomu w pracy może być poważnym faux pas.
+- Słowo "samuraj" pochodzi od "saburau" (służyć), "tsunami" dosłownie znaczy "fala portowa", a "karaoke" to "pusty" (kara) + "orkiestra" (oke).
+- "Emoji" to japońskie słowo — od "e" (obraz) + "moji" (znak). Pierwsze emoji stworzył Shigetaka Kurita w 1999 r. dla japońskiego operatora NTT DoCoMo.
+- Japońskie nazwy miast często mają piękne znaczenia: Osaka = "duży pagórek", Hiroszima = "szeroka wyspa", Kanazawa = "bagno złota", Ikebukuro = "staw z sową".
+- System adresowy w Japonii jest koszmarny — ulice nie mają nazw, a budynki numerowane są chronologicznie (po kolei budowy, nie lokalizacji). Nawet taksówkarze polegają na GPS.
+- "Yare yare" — popularne japońskie westchnienie oznaczające zmęczenie lub rezygnację — stało się memem dzięki anime "JoJo's Bizarre Adventure".
+- Osaczanie mają swój własny dialekt (Osaka-ben): mówią "ōkini" zamiast "arigatō" (dziękuję) i "maido" zamiast "irasshaimase" (witamy). Humor w Osace to poważny biznes.
+- Manzai — stand-up w duetach z boke (głupek) i tsukkomi (ten, co poprawia) — pochodzi z Osaki. Comedian z Osaki to jak piłkarz z Brazylii.
+- Japoński ma specjalne liczebniki (klasyfikatory) dla różnych typów obiektów — inne słowo "dwa" dla dwóch osób, dwóch zwierząt, dwóch płaskich przedmiotów i dwóch długich przedmiotów.
+- Wizytówki (meishi) w Japonii wymienia się oburącz z lekkim ukłonem. Nie pisz po czyjejś wizytówce, nie wkładaj jej do tylnej kieszeni i nie baw się nią podczas rozmowy.
+- "Naruhodo" — japońskie "rozumiem/aha" — jest jednym z najczęściej używanych słów w rozmowie. Japończycy używają go niemal odruchowo, żeby pokazać, że słuchają.
+- Japońskie pismo poziome czyta się od lewej do prawej, ale tradycyjne pismo pionowe — od prawej do lewej. Dlatego manga czyta się "od tyłu" według zachodnich standardów.
+- W japońskim nie ma liczby mnogiej, rodzajników ani rozróżnienia na "on/ona" w mowie potocznej. Kontekst jest królem — Japończycy rozumieją z sytuacji to, co inne języki wyrażają gramatyką.
+- Słowo "otaku" (maniak/fan) w Japonii ma lekko negatywne konotacje — sugeruje obsesję i izolację społeczną. Na Zachodzie zostało przejęte jako pozytywne określenie fana anime.
+- "Kawaii" (słodki/uroczy) to jedno z najważniejszych pojęć w japońskiej kulturze pop. Ma własną estetykę, modę, a nawet wpływa na design produktów codziennego użytku.
