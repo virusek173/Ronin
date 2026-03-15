@@ -1,9 +1,13 @@
-.PHONY: up down restart
+.PHONY: up down restart logs
 
 up:
-	docker build -t ronin . && docker run -d --name ronin --env-file .env --restart unless-stopped ronin
+	docker compose up -d --build
 
 down:
-	docker stop ronin && docker rm ronin
+	docker compose down
 
-restart: down up
+restart:
+	docker compose restart
+
+logs:
+	docker compose logs -f
