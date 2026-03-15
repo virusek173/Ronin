@@ -1,56 +1,56 @@
-# Ronin 🏯
+# Ronin
 
-Sarkastyczny bot Discordowy o Japonii. Codziennie o 6:00 wysyła ciekawostkę, odpowiada na pytania i prowadzi rozmowy z kontekstem — napędzany przez Claude API.
-
----
-
-## Funkcjonalności
-
-- **Codzienna ciekawostka** — co rano o 6:00 (czas polski) bot wysyła jedną ciekawostkę na wybrany kanał. Bez powtórek — przechodzi przez całą pulę 224 faktów z 8 kategorii, zanim zacznie cykl od nowa.
-- **Interakcja konwersacyjna** — bot odpowiada na `@Ronin` lub reply do jego wiadomości. Utrzymuje kontekst rozmowy per kanał.
-- **Ciekawostka z kategorii** — `@Ronin opowiedz coś o kuchni` losuje fakt z wybranej kategorii.
-- **Lista kategorii** — `@Ronin jakie masz kategorie?` zwraca pełną listę z emoji i liczbą ciekawostek.
-- **Rate limiting** — max 5 wiadomości na minutę per użytkownik.
+Sarcastic Discord bot about Japan. Sends a daily fun fact at 6:00 AM, answers questions, and holds contextual conversations — powered by Claude API.
 
 ---
 
-## Baza wiedzy
+## Features
 
-8 kategorii, łącznie 224 ciekawostki:
+- **Daily fun fact** — every morning at 6:00 AM (Europe/Warsaw) the bot posts one fact to a designated channel. No repeats — it cycles through all 224 facts across 8 categories before resetting.
+- **Conversational interaction** — responds to `@Ronin` mentions or replies to its messages. Maintains per-channel conversation context.
+- **Category-specific facts** — `@Ronin tell me something about cuisine` draws a random fact from the matching category.
+- **Category list** — `@Ronin what categories do you have?` returns the full list with emoji and fact counts.
+- **Rate limiting** — max 5 messages per minute per user.
 
-| Kategoria | Plik | Ciekawostki | Emoji |
+---
+
+## Knowledge Base
+
+8 categories, 224 facts total:
+
+| Category | File | Facts | Emoji |
 |---|---|---|---|
-| Historia | `historia.md` | 37 | 🏯 |
-| Kultura | `kultura.md` | 31 | 🎭 |
-| Kuchnia | `kuchnia.md` | 34 | 🍱 |
-| Język | `jezyk.md` | 22 | 🗾 |
-| Technologia | `technologia.md` | 25 | ⚙️ |
-| Natura | `natura.md` | 25 | 🌸 |
-| Codzienne życie | `codzienne-zycie.md` | 25 | 🏙️ |
-| Mitologia | `mitologia.md` | 25 | ⛩️ |
+| History | `historia.md` | 37 | 🏯 |
+| Culture | `kultura.md` | 31 | 🎭 |
+| Cuisine | `kuchnia.md` | 34 | 🍱 |
+| Language | `jezyk.md` | 22 | 🗾 |
+| Technology | `technologia.md` | 25 | ⚙️ |
+| Nature | `natura.md` | 25 | 🌸 |
+| Daily Life | `codzienne-zycie.md` | 25 | 🏙️ |
+| Mythology | `mitologia.md` | 25 | ⛩️ |
 
-Dodanie nowej kategorii = nowy plik `.md` w `knowledge-base/` z nagłówkiem `# Kategoria: Nazwa`. Bot ładuje wszystkie pliki przy starcie automatycznie.
+To add a new category, create a `.md` file in `knowledge-base/` with the header `# Kategoria: Name`. The bot loads all files automatically on startup.
 
 ---
 
-## Stack technologiczny
+## Tech Stack
 
-| Komponent | Technologia |
+| Component | Technology |
 |---|---|
-| Runtime | Node.js ≥ 20 + TypeScript |
+| Runtime | Node.js >= 20 + TypeScript |
 | Discord | `discord.js` v14 |
-| AI | `@anthropic-ai/sdk` — model `claude-sonnet-4-5` (konfigurowalny) |
+| AI | `@anthropic-ai/sdk` — model `claude-sonnet-4-5` (configurable) |
 | Scheduler | `node-cron` |
-| Logowanie | `pino` + `pino-pretty` |
+| Logging | `pino` + `pino-pretty` |
 | Tracking | `data/tracker.json` |
 
 ---
 
-## Struktura projektu
+## Project Structure
 
 ```
 ronin/
-├── knowledge-base/       # Baza wiedzy (pliki MD)
+├── knowledge-base/       # Knowledge base (MD files)
 │   ├── historia.md
 │   ├── kultura.md
 │   ├── kuchnia.md
@@ -60,26 +60,26 @@ ronin/
 │   ├── codzienne-zycie.md
 │   └── mitologia.md
 ├── data/
-│   └── tracker.json      # Stan cyklu ciekawostek (auto-generowany)
+│   └── tracker.json      # Fact cycle state (auto-generated)
 ├── src/
 │   ├── index.ts          # Entry point
-│   ├── config.ts         # Konfiguracja z .env
+│   ├── config.ts         # Configuration from .env
 │   ├── bot/
 │   │   ├── client.ts         # Discord.js client
-│   │   ├── scheduler.ts      # Cron job — codzienna ciekawostka
+│   │   ├── scheduler.ts      # Cron job — daily fact
 │   │   └── events/
-│   │       ├── ready.ts          # On ready — logi startowe
-│   │       └── messageCreate.ts  # Handler mention/reply
+│   │       ├── ready.ts          # On ready — startup logs
+│   │       └── messageCreate.ts  # Mention/reply handler
 │   ├── ai/
-│   │   ├── claude.ts         # Wrapper Claude API (streaming)
-│   │   ├── prompts.ts        # System prompts i osobowość bota
-│   │   └── context.ts        # Kontekst konwersacji per kanał
+│   │   ├── claude.ts         # Claude API wrapper (streaming)
+│   │   ├── prompts.ts        # System prompts and bot personality
+│   │   └── context.ts        # Per-channel conversation context
 │   ├── knowledge/
-│   │   ├── loader.ts         # Parser plików MD + dopasowanie kategorii
-│   │   ├── categories.ts     # Helpers formatowania kategorii
-│   │   └── tracker.ts        # Śledzenie wysłanych ciekawostek
+│   │   ├── loader.ts         # MD file parser + category matching
+│   │   ├── categories.ts     # Category formatting helpers
+│   │   └── tracker.ts        # Sent facts tracking
 │   └── utils/
-│       └── logger.ts         # Logger pino
+│       └── logger.ts         # Pino logger
 ├── .env.example
 ├── package.json
 └── tsconfig.json
@@ -87,44 +87,44 @@ ronin/
 
 ---
 
-## Uruchomienie
+## Getting Started
 
-### 1. Wymagania
+### 1. Prerequisites
 
-- Node.js ≥ 20
-- Konto [Discord Developer Portal](https://discord.com/developers/applications)
-- Klucz [Anthropic API](https://console.anthropic.com)
+- Node.js >= 20
+- [Discord Developer Portal](https://discord.com/developers/applications) account
+- [Anthropic API](https://console.anthropic.com) key
 
-### 2. Stwórz bota na Discord Developer Portal
+### 2. Create the bot on Discord Developer Portal
 
-1. **New Application** → nadaj nazwę „Ronin"
-2. Zakładka **Bot** → **Reset Token** → skopiuj token
-3. W sekcji **Privileged Gateway Intents** włącz **Message Content Intent**
-4. Zakładka **OAuth2 → URL Generator**:
+1. **New Application** -> name it "Ronin"
+2. **Bot** tab -> **Reset Token** -> copy the token
+3. Under **Privileged Gateway Intents**, enable **Message Content Intent**
+4. **OAuth2 -> URL Generator**:
    - Scope: `bot`
    - Permissions: `Send Messages`, `Read Message History`, `View Channels`
-   - Wygenerowanym URL zaproś bota na serwer
+   - Use the generated URL to invite the bot to your server
 
-### 3. Konfiguracja
+### 3. Configuration
 
 ```bash
 cp .env.example .env
 ```
 
-Uzupełnij `.env`:
+Fill in `.env`:
 
 ```env
-DISCORD_TOKEN=twój_token_bota
-DISCORD_CLIENT_ID=id_aplikacji_z_portalu
-DAILY_CHANNEL_ID=id_kanału_na_codzienne_ciekawostki
-ANTHROPIC_API_KEY=twój_klucz_anthropic
+DISCORD_TOKEN=your_bot_token
+DISCORD_CLIENT_ID=your_application_id
+DAILY_CHANNEL_ID=channel_id_for_daily_facts
+ANTHROPIC_API_KEY=your_anthropic_key
 ```
 
-> **DAILY_CHANNEL_ID** — w Discordzie kliknij PPM na kanał → **Kopiuj ID**. Wymaga włączonego Trybu Dewelopera (Ustawienia → Zaawansowane).
+> **DAILY_CHANNEL_ID** — in Discord, right-click the channel -> **Copy ID**. Requires Developer Mode enabled (Settings -> Advanced).
 
-### 4. Instalacja i uruchomienie
+### 4. Install and Run
 
-**Produkcja:**
+**Production:**
 ```bash
 npm install
 npm run build
@@ -137,9 +137,9 @@ npm install
 npm run dev
 ```
 
-### 5. Weryfikacja
+### 5. Verify
 
-Poprawny start wygląda tak:
+A successful startup looks like:
 
 ```
 INFO: Loaded 8 categories
@@ -152,36 +152,39 @@ INFO: Facts remaining in current cycle: 224
 
 ---
 
-## Zmienne środowiskowe
+## Environment Variables
 
-| Zmienna | Wymagana | Domyślna | Opis |
+| Variable | Required | Default | Description |
 |---|---|---|---|
-| `DISCORD_TOKEN` | ✅ | — | Token bota z Discord Developer Portal |
-| `DISCORD_CLIENT_ID` | ✅ | — | ID aplikacji z Discord Developer Portal |
-| `DAILY_CHANNEL_ID` | ✅ | — | ID kanału na codzienne ciekawostki |
-| `ANTHROPIC_API_KEY` | ✅ | — | Klucz API Anthropic |
-| `CLAUDE_MODEL` | ❌ | `claude-sonnet-4-5` | Model Claude do użycia |
-| `CONVERSATION_CONTEXT_LIMIT` | ❌ | `8` | Liczba ostatnich wiadomości w kontekście |
-| `CONVERSATION_TIMEOUT_MS` | ❌ | `3600000` | Timeout kontekstu rozmowy (ms), domyślnie 1h |
-| `LOG_LEVEL` | ❌ | `info` | Poziom logowania (`debug`, `info`, `warn`, `error`) |
-| `TZ` | ❌ | `Europe/Warsaw` | Strefa czasowa |
+| `DISCORD_TOKEN` | Yes | — | Bot token from Discord Developer Portal |
+| `DISCORD_CLIENT_ID` | Yes | — | Application ID from Discord Developer Portal |
+| `DAILY_CHANNEL_ID` | Yes | — | Channel ID for daily facts |
+| `ANTHROPIC_API_KEY` | Yes | — | Anthropic API key |
+| `CLAUDE_MODEL` | No | `claude-sonnet-4-5` | Claude model to use |
+| `CONVERSATION_CONTEXT_LIMIT` | No | `8` | Number of recent messages kept in context |
+| `CONVERSATION_TIMEOUT_MS` | No | `3600000` | Conversation context timeout (ms), default 1h |
+| `CRON_EXPRESSION` | No | `0 6 * * *` | Cron schedule for daily facts |
+| `LOG_LEVEL` | No | `info` | Log level (`debug`, `info`, `warn`, `error`) |
+| `TZ` | No | `Europe/Warsaw` | Timezone |
 
 ---
 
-## Przykładowe interakcje
+## Example Interactions
 
 ```
-@Ronin opowiedz coś o kuchni
-→ Naruhodo... Kuchnia, tak? Wasabi, które dostajesz w 99% restauracji
-  poza Japonią, to barwiony chrzan. Prawdziwe kosztuje ok. 200 zł za korzeń. 🍣
+@Ronin tell me something about cuisine
+→ Naruhodo... Cuisine, is it? The wasabi you get in 99% of restaurants
+  outside Japan is just dyed horseradish. Real wasabi costs about $50 per root. 🍣
 
-@Ronin jakie masz kategorie?
-→ Oto moje domeny wiedzy, grasshopper:
-  🏯 Historia — 37 ciekawostek
-  🎭 Kultura — 31 ciekawostek
+@Ronin what categories do you have?
+→ Here are my domains of knowledge, grasshopper:
+  🏯 History — 37 facts
+  🎭 Culture — 31 facts
   ...
 
-@Ronin powiedz coś o sporcie
-→ Sport? Tego nie mam w swoim arsenale. Ale mam za to:
-  🏯 Historia, 🎭 Kultura, 🍱 Kuchnia...
+@Ronin tell me about sports
+→ Sports? That's not in my arsenal. But I do have:
+  🏯 History, 🎭 Culture, 🍱 Cuisine...
 ```
+
+> **Note:** The bot communicates in Polish. Examples above are translated for reference.
