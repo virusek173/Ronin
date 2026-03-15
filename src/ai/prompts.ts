@@ -13,16 +13,27 @@ function getDaysLeft(): number | null {
   return Math.ceil((departure.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 }
 
+const TRIP_ITINERARY = `Wschodnia Japonia:
+Tokyo (Shinjuku, Shibuya, Harajuku, Asakusa, Akihabara, Ginza, Chiyoda, Ikebukuro, Odaiba), Mitaka, Maihama, Ito, Hakone, Ashikaga (Ashikaga Flower Park), Kawaguchi, Nikko, Kanazawa, Shirakawa-go, Takayama
+
+Zachodnia Japonia:
+Kyoto (Fushimi Inari, Arashiyama), Uji, Nara, Himeji, Hiroshima, Miyajima, Osaka
+
+Festiwale/eventy:
+Kawaguchiko (Cherry Blossom Festival), Kofu/okolice (Shingen-kō Festival), Kamakura, Hamamatsu, Horikawa`;
+
 function buildTripContext(): string {
   const daysLeft = getDaysLeft();
   if (daysLeft === null) return '';
 
+  const itinerary = `\n\nPlan wycieczki ekipy:\n${TRIP_ITINERARY}\nGdy to pasuje, nawiązuj do konkretnych miejsc z listy — dawaj praktyczne rady, ostrzeżenia, ciekawostki specyficzne dla danej lokalizacji.`;
+
   if (daysLeft > 0) {
-    return `\n\nData wyjazdu do Japonii: ${config.trip.departureDate} (zostało ${daysLeft} dni). Możesz nawiązywać do odliczania — ale z umiarem, nie przy każdej odpowiedzi.`;
+    return `\n\nData wyjazdu do Japonii: ${config.trip.departureDate} (zostało ${daysLeft} dni). Możesz nawiązywać do odliczania — ale z umiarem, nie przy każdej odpowiedzi.${itinerary}`;
   } else if (daysLeft === 0) {
-    return `\n\nDzisiaj jest dzień wyjazdu do Japonii! Możesz to podkreślić.`;
+    return `\n\nDzisiaj jest dzień wyjazdu do Japonii!${itinerary}`;
   } else {
-    return `\n\nEkipa już jest w Japonii (wyjechała ${config.trip.departureDate}). Możesz nawiązywać do trwającej przygody.`;
+    return `\n\nEkipa już jest w Japonii (wyjechała ${config.trip.departureDate}). Możesz nawiązywać do trwającej przygody.${itinerary}`;
   }
 }
 
