@@ -44,12 +44,21 @@ const FACT_REQUEST_PATTERNS = [
   /\b(powiedz|opowiedz|powiedz mi|co wiesz|ciekawostk|powiedz coś|coś o)\b/i,
 ];
 
+// Patterns suggesting user specified a topic/category (has "about X" structure)
+const TOPIC_HINT_PATTERNS = [
+  /\b(o |na temat |z kategorii |z działu )/i,
+];
+
 function isAskingForCategoryList(text: string): boolean {
   return CATEGORY_LIST_PATTERNS.some(p => p.test(text));
 }
 
 function isAskingForFact(text: string): boolean {
   return FACT_REQUEST_PATTERNS.some(p => p.test(text));
+}
+
+function hasTopicHint(text: string): boolean {
+  return TOPIC_HINT_PATTERNS.some(p => p.test(text));
 }
 
 async function sendLongMessage(channel: TextChannel, text: string): Promise<void> {
@@ -136,15 +145,22 @@ export function registerMessageCreateEvent(
           const fact = randomFact(matched);
           injectedFact = { fact, category: matched };
           logger.debug({ category: matched.name }, 'Injecting fact into context');
-        } else {
-          // No matching category found — inform the user
+        } else if (hasTopicHint(rawContent)) {
+          // User specified a topic that doesn't exist in the knowledge base
           const categoryList = formatCategoryList(categories);
           const notFoundMsg =
-            `Hmm... tej kategorii nie mam w swoim arsenale. ` +
-            `Ale mam za to:\n${categoryList}\n\nWybierz coś z listy, a nie wymyślaj. Naruhodo?`;
+            `Hmm... tego nie mam w swoim arsenale. Ale mam za to:\n${categoryList}\n\nWybierz coś z listy, a nie wymyślaj. Naruhodo?`;
           conversationContext.addUserMessage(channelId, rawContent);
           conversationContext.addAssistantMessage(channelId, notFoundMsg);
           await message.reply(notFoundMsg);
+          return;
+        } else {
+          // User asked for a fact but didn't specify a category — ask which one
+          const categoryList = formatCategoryList(categories);
+          const askMsg = `Z której kategorii mam coś opowiedzieć, grasshopper? 🗾\n\n${categoryList}`;
+          conversationContext.addUserMessage(channelId, rawContent);
+          conversationContext.addAssistantMessage(channelId, askMsg);
+          await message.reply(askMsg);
           return;
         }
       }
