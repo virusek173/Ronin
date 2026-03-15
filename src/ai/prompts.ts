@@ -70,7 +70,7 @@ export function buildGreetingPrompt(): string {
   return `${SYSTEM_PROMPT}
 
 Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie.
-Przywitaj się jednym, maksymalnie dwoma zdaniami — wspomnij, że jesteś tu po to, żeby przygotować ekipę do wycieczki do Japonii i że codziennie rano będziesz wrzucał ciekawostkę. Użyj kilku emoji. Styl sarkastycznego samuraja.`;
+Przywitaj się jednym, maksymalnie dwoma zdaniami — wspomnij, że jesteś tu po to, żeby pomóc ekipie wczuć się w klimat Japonii przed wycieczką i że codziennie rano będziesz wrzucał ciekawostkę. Ton ciepły i zachęcający, z lekkim japońskim akcentem (np. "Yoshi!"). Bez uszczypliwości, bez sarkazmu — tu chodzi o budowanie ekscytacji przed podróżą. Użyj kilku emoji.`;
 }
 
 export function buildCategoryListPrompt(categories: Category[]): string {

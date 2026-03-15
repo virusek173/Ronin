@@ -21,7 +21,7 @@ export function registerReadyEvent(
     try {
       const channel = await client.channels.fetch(config.discord.dailyChannelId);
       if (channel instanceof TextChannel) {
-        const greeting = await askClaudeSimple(buildGreetingPrompt(), 80);
+        const greeting = await askClaudeSimple(buildGreetingPrompt(), 200);
         await channel.send(greeting);
       }
     } catch (err) {
