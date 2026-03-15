@@ -100,7 +100,6 @@ Bot reaguje na wiadomości użytkowników i prowadzi rozmowę z kontekstem.
 
 - Utrzymywany in-memory (Map per channel ID)
 - Limit: konfigurowalne N ostatnich wiadomości (`CONVERSATION_CONTEXT_LIMIT`, domyślnie 8)
-- Timeout: wygasa po `CONVERSATION_TIMEOUT_MINUTES` (domyślnie 30 min) bez aktywności
 - Struktura: tablica par (user + assistant) z timestampami
 - Kontekst **NIE jest persystentny** między restartami — to akceptowalne
 
@@ -108,7 +107,7 @@ Bot reaguje na wiadomości użytkowników i prowadzi rozmowę z kontekstem.
 
 Każde zapytanie zawiera:
 1. System prompt z osobowością
-2. Kontekst bazy wiedzy (relevantne ciekawostki)
+2. Kontekst bazy wiedzy (jedna losowa ciekawostka z rozpoznanej kategorii)
 3. Historia konwersacji (ostatnie N wiadomości)
 
 #### Acceptance criteria
@@ -129,14 +128,16 @@ Użytkownik może poprosić bota o ciekawostkę z konkretnej kategorii (np. "@Ro
 
 #### Mechanizm
 
-- Claude API rozpoznaje intencję i kategorię z wiadomości użytkownika
-- Bot zwraca ciekawostkę z odpowiedniej kategorii, podaną w swoim stylu
-- Jeśli kategoria nie istnieje — bot informuje i podaje listę dostępnych kategorii
+1. Bot (kod, nie Claude) rozpoznaje kategorię z wiadomości — dopasowanie słów kluczowych do listy kategorii
+2. Losuje jedną ciekawostkę z tej kategorii z bazy wczytanej przy starcie
+3. Wstrzykuje ją do kontekstu promptu Claude API
+4. Claude opowiada ją w stylu bota
+5. Jeśli kategoria nie istnieje — bot informuje i podaje listę dostępnych kategorii
 
 #### Acceptance criteria
 
 - [ ] Bot rozpoznaje prośbę o ciekawostkę z konkretnej kategorii
-- [ ] Bot zwraca ciekawostkę z poprawnej kategorii
+- [ ] Bot losuje jedną ciekawostkę z dopasowanej kategorii i wstrzykuje do kontekstu
 - [ ] Bot informuje o braku kategorii i podaje listę dostępnych, gdy kategoria nie istnieje
 - [ ] Odpowiedź jest sformułowana w osobowości bota
 
@@ -167,7 +168,7 @@ Bot zwraca listę wszystkich kategorii z:
 |---|---|
 | Runtime | Node.js + TypeScript |
 | Discord | `discord.js` (najnowsza stabilna wersja) |
-| AI | `@anthropic-ai/sdk` — model `claude-sonnet-4-20250514` (konfigurowalny w `.env`) |
+| AI | `@anthropic-ai/sdk` — model `claude-sonnet-4-5` (konfigurowalny w `.env`) |
 | Scheduler | `node-cron` |
 | Baza wiedzy | Pliki Markdown w `knowledge-base/` |
 | Logowanie | `pino` |
@@ -265,12 +266,10 @@ DAILY_CHANNEL_ID=
 
 # Anthropic
 ANTHROPIC_API_KEY=
-CLAUDE_MODEL=claude-sonnet-4-20250514
+CLAUDE_MODEL=claude-sonnet-4-5
 
 # Konwersacja
 CONVERSATION_CONTEXT_LIMIT=8
-CONVERSATION_TIMEOUT_MINUTES=30
-
 # Timezone
 TZ=Europe/Warsaw
 ```
@@ -322,7 +321,6 @@ Dodanie nowej kategorii = dodanie nowego pliku `.md` w `knowledge-base/` z odpow
 |---|---|
 | Przechowywanie | In-memory (`Map<channelId, ConversationEntry[]>`) |
 | Limit wiadomości | Konfigurowalny (`CONVERSATION_CONTEXT_LIMIT`, domyślnie 8) |
-| Timeout | Konfigurowalny (`CONVERSATION_TIMEOUT_MINUTES`, domyślnie 30 min) |
 | Persystencja | NIE — resetuje się przy restarcie bota |
 | Scope | Per kanał/wątek |
 
