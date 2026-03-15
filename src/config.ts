@@ -32,4 +32,7 @@ export const config = {
     knowledgeBase: './knowledge-base',
     trackerFile: './data/tracker.json',
   },
+  trip: {
+    departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,
+  },
 } as const;
