@@ -46,3 +46,13 @@ export async function askClaude(
 export async function askClaudeSimple(systemPrompt: string, maxTokens = 600): Promise<string> {
   return askClaude(systemPrompt, [], 'Wykonaj swoje zadanie zgodnie z powyższymi instrukcjami.', maxTokens);
 }
+
+export async function classifyIntent(userMessage: string): Promise<'CATEGORIES' | 'OTHER'> {
+  const result = await askClaude(
+    'Classify the user\'s message. Reply with exactly one word: CATEGORIES if they are asking for a list of available topics/categories, OTHER for anything else.',
+    [],
+    userMessage,
+    5,
+  );
+  return result.trim().toUpperCase().startsWith('CATEGORIES') ? 'CATEGORIES' : 'OTHER';
+}

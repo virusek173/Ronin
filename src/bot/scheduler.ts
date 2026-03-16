@@ -35,7 +35,7 @@ export function startDailyScheduler(
       logger.info({ category: category.name, remaining: tracker.remainingCount }, 'Sending daily fact');
 
       const systemPrompt = buildDailyFactPrompt(fact, category);
-      const response = await askClaudeSimple(systemPrompt, 250);
+      const response = await askClaudeSimple(systemPrompt, 400);
 
       await channel.send(response);
       conversationContext.addAssistantMessage(channel.id, response);

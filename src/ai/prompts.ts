@@ -52,9 +52,9 @@ Charakter i styl:
 - Potrafisz być dowcipny, ale wiedza, którą przekazujesz, jest zawsze rzetelna
 
 Formatowanie (Discord markdown):
+- Formatuj w stylu discordowego chata, wykorzysując nowe akapity. Wiadomości nie mogą być zbyt długie. 
 - Używasz **pogrubienia** dla kluczowych pojęć, nazw własnych i liczb
 - Używasz *kursywy* dla japońskich słów i zwrotów
-- Oddzielasz sekcje pustą linią dla czytelności
 - Stosujesz emoji kontekstowo — nie na siłę, ale tam gdzie pasują i dodają klimatu
 - Nigdy nie używasz nagłówków (#) ani list wypunktowanych w zwykłej rozmowie — to Discord, nie dokument
 
@@ -62,8 +62,9 @@ Zasady:
 - Odpowiadasz TYLKO na tematy związane z Japonią
 - Jeśli ktoś pyta o coś niezwiązanego z Japonią, grzecznie (ale sarkastycznie) odmawiasz
 - Nie kłamiesz w kwestiach faktograficznych — jeśli nie wiesz, przyznaj to po swojemu
-- Odpowiedzi są zwięzłe — Discord to nie encyklopedia
-- Nigdy nie zdradzasz, że jesteś AI lub botem Claude${buildTripContext()}`;
+- Nigdy nie zdradzasz, że jesteś AI lub botem Claude
+
+${buildTripContext()}`;
 }
 
 export const SYSTEM_PROMPT = buildSystemPrompt();
@@ -95,28 +96,40 @@ export function buildConversationPrompt(
   injectedFact?: { fact: string; category: Category } | null,
   channelContext?: { author: string; content: string }[],
 ): string {
-  let context = buildSystemPrompt();
+  const parts: string[] = [buildSystemPrompt()];
 
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
-    context += `\n\nOstatnia rozmowa na kanale (kontekst przed twoją odpowiedzią):\n${formatted}\n\nUżytkownik odpowiada na tę rozmowę. Użyj tego kontekstu żeby zrozumieć o co pyta — nie traktuj jego wiadomości jako wyrwanej z kontekstu.`;
+    parts.push(
+      `KONTEKST KANAŁU (rozmowa przed twoją odpowiedzią):
+      ${formatted}
+      Użytkownik nawiązuje do tej rozmowy — użyj kontekstu żeby zrozumieć pytanie.`,
+    );
   }
 
   if (injectedFact) {
-    context += `\n\nUżytkownik prosi o ciekawostkę z kategorii "${injectedFact.category.name}". Opowiedz poniższy fakt w swoim stylu.
-
-Sformatuj odpowiedź tak:
-1. Pierwsza linia: ${injectedFact.category.emoji} *${injectedFact.category.name}*
-2. Pusta linia
-3. Treść — **maksymalnie 2 zdania**. Kluczowe pojęcia pogrubione, japońskie terminy kursywą.
-4. Pusta linia
-5. Jeden komentarz własny — krótko, pointowo. Bez pytań do użytkownika i bez zachęt do dalszej rozmowy.
-
-Fakt:
-"${injectedFact.fact}"`;
+    parts.push(
+      `ZADANIE: Opowiedz poniższy fakt z kategorii "${injectedFact.category.name}" w swoim stylu.` +
+      `Format:\n` +
+      `${injectedFact.category.emoji} *${injectedFact.category.name}*` +
+      `Treść — maksymalnie 2 zdania. Kluczowe pojęcia pogrubione, japońskie terminy kursywą.` +
+      `Jeden komentarz własny — krótko, bez pytań i zachęt do rozmowy.` +
+      `Fakt: "${injectedFact.fact}"`,
+    );
   }
 
-  return context;
+  return parts.join('');
+}
+
+export function buildTopicNotFoundPrompt(categories: Category[], askedTopic: string): string {
+  const list = formatCategoryList(categories);
+  return `${buildSystemPrompt()}
+
+Użytkownik zapytał o temat "${askedTopic}", którego nie ma w twojej bazie wiedzy.
+Odpowiedz sarkastycznie, że nie masz tego tematu, i przedstaw co masz zamiast tego.
+
+Dostępne kategorie:
+${list}`;
 }
 
 export function buildGreetingPrompt(): string {

@@ -1,15 +1,18 @@
-import { Client, Message, TextChannel } from 'discord.js';
-import { logger } from '../../utils/logger';
-import { Category, findCategoryByKeyword, randomFact } from '../../knowledge/loader';
-import { ConversationContext } from '../../ai/context';
-import { askClaude, askClaudeSimple } from '../../ai/claude';
+import { Client, Message, TextChannel } from "discord.js";
+import { logger } from "../../utils/logger";
 import {
-  SYSTEM_PROMPT,
+  Category,
+  findCategoryByKeyword,
+  randomFact,
+} from "../../knowledge/loader";
+import { ConversationContext } from "../../ai/context";
+import { askClaude, askClaudeSimple, classifyIntent } from "../../ai/claude";
+import {
   buildConversationPrompt,
   buildCategoryListPrompt,
-} from '../../ai/prompts';
-import { formatCategoryList } from '../../knowledge/categories';
-import { config } from '../../config';
+  buildTopicNotFoundPrompt,
+} from "../../ai/prompts";
+import { config } from "../../config";
 
 // Rate limiter: userId → timestamps of messages
 const rateLimiter = new Map<string, number[]>();
@@ -17,7 +20,7 @@ const rateLimiter = new Map<string, number[]>();
 function isRateLimited(userId: string): boolean {
   const now = Date.now();
   const timestamps = rateLimiter.get(userId) ?? [];
-  const recent = timestamps.filter(t => now - t < config.rateLimit.windowMs);
+  const recent = timestamps.filter((t) => now - t < config.rateLimit.windowMs);
 
   if (recent.length >= config.rateLimit.maxMessages) {
     rateLimiter.set(userId, recent);
@@ -29,54 +32,44 @@ function isRateLimited(userId: string): boolean {
   return false;
 }
 
-// Patterns to detect category list request
-const CATEGORY_LIST_PATTERNS = [
-  /\bkategor/i,
-  /\bkategori/i,
-  /\bjak.+tem/i,
-  /\bco (masz|wiesz|posiadasz|mam)/i,
-  /\blistę\b/i,
-  /\btematy/i,
-];
-
 // Patterns to detect "tell me about X" request
 const FACT_REQUEST_PATTERNS = [
   /\b(powiedz|opowiedz|powiedz mi|co wiesz|ciekawostk|powiedz coś|coś o)\b/i,
 ];
 
 // Patterns suggesting user specified a topic/category (has "about X" structure)
-const TOPIC_HINT_PATTERNS = [
-  /\b(o |na temat |z kategorii |z działu )/i,
-];
-
-function isAskingForCategoryList(text: string): boolean {
-  return CATEGORY_LIST_PATTERNS.some(p => p.test(text));
-}
+const TOPIC_HINT_PATTERNS = [/\b(o |na temat |z kategorii |z działu )/i];
 
 function isAskingForFact(text: string): boolean {
-  return FACT_REQUEST_PATTERNS.some(p => p.test(text));
+  return FACT_REQUEST_PATTERNS.some((p) => p.test(text));
 }
 
 function hasTopicHint(text: string): boolean {
-  return TOPIC_HINT_PATTERNS.some(p => p.test(text));
+  return TOPIC_HINT_PATTERNS.some((p) => p.test(text));
 }
 
-async function sendLongMessage(channel: TextChannel, text: string): Promise<void> {
+async function sendLongMessage(message: Message, text: string): Promise<void> {
   const LIMIT = 1990;
   if (text.length <= LIMIT) {
-    await channel.send(text);
+    await message.reply(text);
     return;
   }
-  // Split on last newline before limit
+  // Split on last newline before limit — reply for first chunk, send for rest
   let remaining = text;
+  let isFirst = true;
   while (remaining.length > 0) {
-    if (remaining.length <= LIMIT) {
-      await channel.send(remaining);
-      break;
+    const cutIdx =
+      remaining.length <= LIMIT
+        ? remaining.length
+        : remaining.lastIndexOf("\n", LIMIT);
+    const chunk =
+      cutIdx > 0 ? remaining.slice(0, cutIdx) : remaining.slice(0, LIMIT);
+    if (isFirst) {
+      await message.reply(chunk);
+      isFirst = false;
+    } else {
+      await (message.channel as TextChannel).send(chunk);
     }
-    const cutIdx = remaining.lastIndexOf('\n', LIMIT);
-    const chunk = cutIdx > 0 ? remaining.slice(0, cutIdx) : remaining.slice(0, LIMIT);
-    await channel.send(chunk);
     remaining = remaining.slice(chunk.length).trimStart();
   }
 }
@@ -86,7 +79,7 @@ export function registerMessageCreateEvent(
   categories: Category[],
   conversationContext: ConversationContext,
 ): void {
-  client.on('messageCreate', async (message: Message) => {
+  client.on("messageCreate", async (message: Message) => {
     try {
       // Ignore bots (including self)
       if (message.author.bot) return;
@@ -97,20 +90,22 @@ export function registerMessageCreateEvent(
         message.reference?.messageId !== undefined &&
         (await message.channel.messages
           .fetch(message.reference.messageId)
-          .then(m => m.author.id === client.user!.id)
+          .then((m) => m.author.id === client.user!.id)
           .catch(() => false));
 
       const channelId = message.channelId;
       const userId = message.author.id;
 
       // Strip mention from message content
-      const rawContent = message.content
-        .replace(/<@!?\d+>/g, '')
-        .trim();
+      const rawContent = message.content.replace(/<@!?\d+>/g, "").trim();
 
       // Always record human messages in channel buffer
       if (rawContent) {
-        conversationContext.addChannelMessage(channelId, message.author.displayName, rawContent);
+        conversationContext.addChannelMessage(
+          channelId,
+          message.author.displayName,
+          rawContent,
+        );
       }
 
       if (!isMention && !isReplyToBot) return;
@@ -118,29 +113,46 @@ export function registerMessageCreateEvent(
       // Rate limit check
       if (isRateLimited(userId)) {
         await message.reply(
-          'Yare yare... Spokojnie, grasshopper. Max 5 wiadomości na minutę. Poczekaj chwilę.'
+          "Yare yare... Spokojnie, grasshopper. Max 5 wiadomości na minutę. Poczekaj chwilę.",
         );
         return;
       }
 
-      logger.info({ userId, channelId, content: rawContent.slice(0, 80) }, 'Handling message');
+      logger.info(
+        { userId, channelId, content: rawContent.slice(0, 80) },
+        "Handling message",
+      );
 
       // Show typing indicator
-      if (message.channel instanceof TextChannel || message.channel.isTextBased()) {
+      if (
+        message.channel instanceof TextChannel ||
+        message.channel.isTextBased()
+      ) {
         await (message.channel as TextChannel).sendTyping().catch(() => {});
       }
 
       // Build channel context once — always injected so bot has full picture
-      const channelContext = conversationContext.getChannelBuffer(channelId)
-        .filter(m => m.content !== rawContent);
+      const channelContext = conversationContext
+        .getChannelBuffer(channelId)
+        .filter((m) => m.content !== rawContent);
 
-      // Case 1: asking for category list
-      if (isAskingForCategoryList(rawContent) && !isAskingForFact(rawContent)) {
-        const systemPrompt = buildCategoryListPrompt(categories, channelContext);
+      // Case 1: asking for category list (LLM classifier)
+      if (
+        !isAskingForFact(rawContent) &&
+        (await classifyIntent(rawContent)) === "CATEGORIES"
+      ) {
+        const systemPrompt = buildCategoryListPrompt(
+          categories,
+          channelContext,
+        );
         const response = await askClaudeSimple(systemPrompt, 500);
         conversationContext.addUserMessage(channelId, rawContent);
         conversationContext.addAssistantMessage(channelId, response);
-        conversationContext.addChannelMessage(channelId, client.user!.displayName, response);
+        conversationContext.addChannelMessage(
+          channelId,
+          client.user!.displayName,
+          response,
+        );
         await message.reply(response);
         return;
       }
@@ -154,51 +166,56 @@ export function registerMessageCreateEvent(
         if (matched) {
           const fact = randomFact(matched);
           injectedFact = { fact, category: matched };
-          logger.debug({ category: matched.name }, 'Injecting fact into context');
+          logger.debug(
+            { category: matched.name },
+            "Injecting fact into context",
+          );
         } else if (hasTopicHint(rawContent)) {
           // User specified a topic that doesn't exist in the knowledge base
-          const categoryList = formatCategoryList(categories);
-          const notFoundMsg =
-            `Hmm... tego nie mam w swoim arsenale. Ale mam za to:\n${categoryList}\n\nWybierz coś z listy, a nie wymyślaj. Naruhodo?`;
+          const notFoundMsg = await askClaudeSimple(
+            buildTopicNotFoundPrompt(categories, rawContent),
+            300,
+          );
           conversationContext.addUserMessage(channelId, rawContent);
           conversationContext.addAssistantMessage(channelId, notFoundMsg);
-          conversationContext.addChannelMessage(channelId, client.user!.displayName, notFoundMsg);
+          conversationContext.addChannelMessage(
+            channelId,
+            client.user!.displayName,
+            notFoundMsg,
+          );
           await message.reply(notFoundMsg);
           return;
         } else {
-          // User asked for a fact but didn't specify a category — ask which one
-          const categoryList = formatCategoryList(categories);
-          const askMsg = `Z której kategorii mam coś opowiedzieć, grasshopper? 🗾\n\n${categoryList}`;
-          conversationContext.addUserMessage(channelId, rawContent);
-          conversationContext.addAssistantMessage(channelId, askMsg);
-          conversationContext.addChannelMessage(channelId, client.user!.displayName, askMsg);
-          await message.reply(askMsg);
-          return;
+          // No category specified — fall through to normal Claude flow
         }
       }
 
       // Build prompt and get conversation history
       const history = conversationContext.getHistory(channelId);
-      const systemPrompt = buildConversationPrompt(rawContent, injectedFact, channelContext);
+      const systemPrompt = buildConversationPrompt(
+        rawContent,
+        injectedFact,
+        channelContext,
+      );
 
       const response = await askClaude(systemPrompt, history, rawContent, 600);
 
       // Update context
       conversationContext.addUserMessage(channelId, rawContent);
       conversationContext.addAssistantMessage(channelId, response);
-      conversationContext.addChannelMessage(channelId, client.user!.displayName, response);
+      conversationContext.addChannelMessage(
+        channelId,
+        client.user!.displayName,
+        response,
+      );
 
       // Send response
-      if (message.channel instanceof TextChannel) {
-        await sendLongMessage(message.channel, response);
-      } else {
-        await message.reply(response);
-      }
+      await sendLongMessage(message, response);
     } catch (err) {
-      logger.error({ err }, 'Error handling messageCreate');
+      logger.error({ err }, "Error handling messageCreate");
       try {
         await message.reply(
-          'Yare yare... coś się zacięło po mojej stronie. Spróbuj jeszcze raz.'
+          "Yare yare... coś się zacięło po mojej stronie. Spróbuj jeszcze raz.",
         );
       } catch {
         // ignore reply error
