@@ -3,6 +3,7 @@ import { logger } from '../../utils/logger';
 import { Category } from '../../knowledge/loader';
 import { totalFactCount } from '../../knowledge/categories';
 import { FactTracker } from '../../knowledge/tracker';
+import { ConversationContext } from '../../ai/context';
 import { askClaudeSimple } from '../../ai/claude';
 import { buildGreetingPrompt } from '../../ai/prompts';
 import { config } from '../../config';
@@ -11,6 +12,7 @@ export function registerReadyEvent(
   client: Client,
   categories: Category[],
   tracker: FactTracker,
+  conversationContext: ConversationContext,
 ): void {
   client.once('ready', async () => {
     logger.info(`Bot connected as ${client.user?.tag}`);
@@ -23,6 +25,7 @@ export function registerReadyEvent(
       if (channel instanceof TextChannel) {
         const greeting = await askClaudeSimple(buildGreetingPrompt(), 200);
         await channel.send(greeting);
+        conversationContext.addAssistantMessage(channel.id, greeting);
       }
     } catch (err) {
       logger.error({ err }, 'Failed to send greeting');

@@ -41,7 +41,7 @@ async function main(): Promise<void> {
   const client = createDiscordClient();
 
   // Register events
-  registerReadyEvent(client, categories, tracker);
+  registerReadyEvent(client, categories, tracker, conversationContext);
   registerMessageCreateEvent(client, categories, conversationContext);
 
   // Start daily scheduler (after client is created)
