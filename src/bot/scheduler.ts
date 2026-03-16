@@ -39,6 +39,7 @@ export function startDailyScheduler(
 
       await channel.send(response);
       conversationContext.addAssistantMessage(channel.id, response);
+      conversationContext.addChannelMessage(channel.id, client.user!.displayName, response);
       logger.info('Daily fact sent successfully');
     } catch (err) {
       logger.error({ err }, 'Failed to send daily fact');

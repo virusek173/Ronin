@@ -182,6 +182,7 @@ export function registerMessageCreateEvent(
       // Update context
       conversationContext.addUserMessage(channelId, rawContent);
       conversationContext.addAssistantMessage(channelId, response);
+      conversationContext.addChannelMessage(channelId, client.user!.displayName, response);
 
       // Send response
       if (message.channel instanceof TextChannel) {

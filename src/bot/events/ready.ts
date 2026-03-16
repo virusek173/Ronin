@@ -26,6 +26,7 @@ export function registerReadyEvent(
         const greeting = await askClaudeSimple(buildGreetingPrompt(), 200);
         await channel.send(greeting);
         conversationContext.addAssistantMessage(channel.id, greeting);
+        conversationContext.addChannelMessage(channel.id, client.user!.displayName, greeting);
       }
     } catch (err) {
       logger.error({ err }, 'Failed to send greeting');
