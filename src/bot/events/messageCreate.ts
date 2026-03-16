@@ -101,21 +101,19 @@ export function registerMessageCreateEvent(
           .catch(() => false));
 
       const channelId = message.channelId;
-
-      if (!isMention && !isReplyToBot) {
-        // Not directed at bot — store in channel buffer for future context
-        const content = message.content.trim();
-        if (content) {
-          conversationContext.addChannelMessage(channelId, message.author.displayName, content);
-        }
-        return;
-      }
       const userId = message.author.id;
 
       // Strip mention from message content
       const rawContent = message.content
         .replace(/<@!?\d+>/g, '')
         .trim();
+
+      // Always record human messages in channel buffer
+      if (rawContent) {
+        conversationContext.addChannelMessage(channelId, message.author.displayName, rawContent);
+      }
+
+      if (!isMention && !isReplyToBot) return;
 
       // Rate limit check
       if (isRateLimited(userId)) {
@@ -138,6 +136,7 @@ export function registerMessageCreateEvent(
         const response = await askClaudeSimple(systemPrompt, 500);
         conversationContext.addUserMessage(channelId, rawContent);
         conversationContext.addAssistantMessage(channelId, response);
+        conversationContext.addChannelMessage(channelId, client.user!.displayName, response);
         await message.reply(response);
         return;
       }
@@ -159,6 +158,7 @@ export function registerMessageCreateEvent(
             `Hmm... tego nie mam w swoim arsenale. Ale mam za to:\n${categoryList}\n\nWybierz coś z listy, a nie wymyślaj. Naruhodo?`;
           conversationContext.addUserMessage(channelId, rawContent);
           conversationContext.addAssistantMessage(channelId, notFoundMsg);
+          conversationContext.addChannelMessage(channelId, client.user!.displayName, notFoundMsg);
           await message.reply(notFoundMsg);
           return;
         } else {
@@ -167,6 +167,7 @@ export function registerMessageCreateEvent(
           const askMsg = `Z której kategorii mam coś opowiedzieć, grasshopper? 🗾\n\n${categoryList}`;
           conversationContext.addUserMessage(channelId, rawContent);
           conversationContext.addAssistantMessage(channelId, askMsg);
+          conversationContext.addChannelMessage(channelId, client.user!.displayName, askMsg);
           await message.reply(askMsg);
           return;
         }
