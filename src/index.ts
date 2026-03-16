@@ -34,7 +34,8 @@ async function main(): Promise<void> {
   logger.info({ remaining: tracker.remainingCount }, 'Tracker initialized');
 
   // Initialize conversation context
-  const conversationContext = new ConversationContext();
+  const bufferFilePath = path.resolve(config.paths.channelBufferFile);
+  const conversationContext = new ConversationContext(bufferFilePath);
 
   // Initialize Discord client
   const client = createDiscordClient();
@@ -44,7 +45,7 @@ async function main(): Promise<void> {
   registerMessageCreateEvent(client, categories, conversationContext);
 
   // Start daily scheduler (after client is created)
-  startDailyScheduler(client, categories, tracker);
+  startDailyScheduler(client, categories, tracker, conversationContext);
 
   // Graceful shutdown
   function shutdown(signal: string): void {

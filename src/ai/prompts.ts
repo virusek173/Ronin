@@ -93,8 +93,14 @@ Ciekawostka:
 export function buildConversationPrompt(
   userMessage: string,
   injectedFact?: { fact: string; category: Category } | null,
+  channelContext?: { author: string; content: string }[],
 ): string {
   let context = buildSystemPrompt();
+
+  if (channelContext && channelContext.length > 0) {
+    const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
+    context += `\n\nOstatnia rozmowa na kanale (zanim zostałeś wywołany):\n${formatted}\n\nMożesz nawiązać do tej rozmowy, jeśli jest relevantna do pytania.`;
+  }
 
   if (injectedFact) {
     context += `\n\nUżytkownik prosi o ciekawostkę z kategorii "${injectedFact.category.name}". Opowiedz poniższy fakt w swoim stylu.

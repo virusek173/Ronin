@@ -31,6 +31,7 @@ export const config = {
   paths: {
     knowledgeBase: './knowledge-base',
     trackerFile: './data/tracker.json',
+    channelBufferFile: './data/channel-buffer.json',
   },
   trip: {
     departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,

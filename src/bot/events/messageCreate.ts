@@ -100,9 +100,16 @@ export function registerMessageCreateEvent(
           .then(m => m.author.id === client.user!.id)
           .catch(() => false));
 
-      if (!isMention && !isReplyToBot) return;
-
       const channelId = message.channelId;
+
+      if (!isMention && !isReplyToBot) {
+        // Not directed at bot — store in channel buffer for future context
+        const content = message.content.trim();
+        if (content) {
+          conversationContext.addChannelMessage(channelId, message.author.displayName, content);
+        }
+        return;
+      }
       const userId = message.author.id;
 
       // Strip mention from message content
@@ -167,7 +174,8 @@ export function registerMessageCreateEvent(
 
       // Build prompt and get conversation history
       const history = conversationContext.getHistory(channelId);
-      const systemPrompt = buildConversationPrompt(rawContent, injectedFact);
+      const channelContext = history.length === 0 ? conversationContext.getChannelBuffer(channelId) : [];
+      const systemPrompt = buildConversationPrompt(rawContent, injectedFact, channelContext);
 
       const response = await askClaude(systemPrompt, history, rawContent, 600);
 

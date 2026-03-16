@@ -3,6 +3,7 @@ import { Client, TextChannel } from 'discord.js';
 import { logger } from '../utils/logger';
 import { Category } from '../knowledge/loader';
 import { FactTracker } from '../knowledge/tracker';
+import { ConversationContext } from '../ai/context';
 import { buildDailyFactPrompt } from '../ai/prompts';
 import { askClaudeSimple } from '../ai/claude';
 import { config } from '../config';
@@ -11,6 +12,7 @@ export function startDailyScheduler(
   client: Client,
   categories: Category[],
   tracker: FactTracker,
+  conversationContext: ConversationContext,
 ): void {
   const expression = config.scheduler.cronExpression;
   cron.schedule(expression, async () => {
@@ -36,6 +38,7 @@ export function startDailyScheduler(
       const response = await askClaudeSimple(systemPrompt, 250);
 
       await channel.send(response);
+      conversationContext.addAssistantMessage(channel.id, response);
       logger.info('Daily fact sent successfully');
     } catch (err) {
       logger.error({ err }, 'Failed to send daily fact');
