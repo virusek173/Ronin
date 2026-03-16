@@ -99,7 +99,7 @@ export function buildConversationPrompt(
 
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
-    context += `\n\nOstatnia rozmowa na kanale (zanim zostałeś wywołany):\n${formatted}\n\nMożesz nawiązać do tej rozmowy, jeśli jest relevantna do pytania.`;
+    context += `\n\nOstatnia rozmowa na kanale (kontekst przed twoją odpowiedzią):\n${formatted}\n\nUżytkownik odpowiada na tę rozmowę. Użyj tego kontekstu żeby zrozumieć o co pyta — nie traktuj jego wiadomości jako wyrwanej z kontekstu.`;
   }
 
   if (injectedFact) {

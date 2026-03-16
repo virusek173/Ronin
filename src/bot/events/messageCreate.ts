@@ -175,7 +175,10 @@ export function registerMessageCreateEvent(
 
       // Build prompt and get conversation history
       const history = conversationContext.getHistory(channelId);
-      const channelContext = history.length === 0 ? conversationContext.getChannelBuffer(channelId) : [];
+      // Inject channel buffer on first invocation, excluding the current message (already passed as userMessage)
+      const channelContext = history.length === 0
+        ? conversationContext.getChannelBuffer(channelId).filter(m => m.content !== rawContent)
+        : [];
       const systemPrompt = buildConversationPrompt(rawContent, injectedFact, channelContext);
 
       const response = await askClaude(systemPrompt, history, rawContent, 600);
