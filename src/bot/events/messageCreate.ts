@@ -130,9 +130,13 @@ export function registerMessageCreateEvent(
         await (message.channel as TextChannel).sendTyping().catch(() => {});
       }
 
+      // Build channel context once — always injected so bot has full picture
+      const channelContext = conversationContext.getChannelBuffer(channelId)
+        .filter(m => m.content !== rawContent);
+
       // Case 1: asking for category list
       if (isAskingForCategoryList(rawContent) && !isAskingForFact(rawContent)) {
-        const systemPrompt = buildCategoryListPrompt(categories);
+        const systemPrompt = buildCategoryListPrompt(categories, channelContext);
         const response = await askClaudeSimple(systemPrompt, 500);
         conversationContext.addUserMessage(channelId, rawContent);
         conversationContext.addAssistantMessage(channelId, response);
@@ -175,10 +179,6 @@ export function registerMessageCreateEvent(
 
       // Build prompt and get conversation history
       const history = conversationContext.getHistory(channelId);
-      // Inject channel buffer on first invocation, excluding the current message (already passed as userMessage)
-      const channelContext = history.length === 0
-        ? conversationContext.getChannelBuffer(channelId).filter(m => m.content !== rawContent)
-        : [];
       const systemPrompt = buildConversationPrompt(rawContent, injectedFact, channelContext);
 
       const response = await askClaude(systemPrompt, history, rawContent, 600);

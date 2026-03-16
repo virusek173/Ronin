@@ -126,9 +126,19 @@ Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie.
 Przywitaj się jednym, maksymalnie dwoma zdaniami — wspomnij, że jesteś tu po to, żeby pomóc ekipie wczuć się w klimat Japonii przed wycieczką i że codziennie rano będziesz wrzucał ciekawostkę. Ton ciepły i zachęcający, z lekkim japońskim akcentem (np. "Yoshi!"). Bez uszczypliwości, bez sarkazmu — tu chodzi o budowanie ekscytacji przed podróżą. Użyj kilku emoji.`;
 }
 
-export function buildCategoryListPrompt(categories: Category[]): string {
+export function buildCategoryListPrompt(
+  categories: Category[],
+  channelContext?: { author: string; content: string }[],
+): string {
   const list = formatCategoryList(categories);
-  return `${buildSystemPrompt()}
+  let prompt = buildSystemPrompt();
+
+  if (channelContext && channelContext.length > 0) {
+    const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
+    prompt += `\n\nOstatnia rozmowa na kanale (kontekst przed twoją odpowiedzią):\n${formatted}\n\nUżytkownik odpowiada na tę rozmowę. Użyj tego kontekstu żeby zrozumieć o co pyta — nie traktuj jego wiadomości jako wyrwanej z kontekstu.`;
+  }
+
+  return `${prompt}
 
 Kontekst: Użytkownik pyta o dostępne kategorie wiedzy.
 Oto pełna lista kategorii z liczbą ciekawostek:

@@ -55,7 +55,10 @@ export class ConversationContext {
   getHistory(channelId: string): ClaudeMessage[] {
     const entries = this.contexts.get(channelId) ?? [];
     const limit = config.conversation.contextLimit;
-    return entries.slice(-limit);
+    const sliced = entries.slice(-limit);
+    // Anthropic API requires messages to start with a user message
+    const firstUserIdx = sliced.findIndex(m => m.role === 'user');
+    return firstUserIdx > 0 ? sliced.slice(firstUserIdx) : sliced;
   }
 
   addUserMessage(channelId: string, content: string): void {
