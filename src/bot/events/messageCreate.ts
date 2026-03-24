@@ -156,10 +156,21 @@ export function registerMessageCreateEvent(
         }
       }
 
+      // If empty mention, build effective content from channel context
+      let effectiveContent = rawContent;
+      if (!effectiveContent) {
+        if (channelContext.length > 0) {
+          const contextLines = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
+          effectiveContent = `(Użytkownik przywołał mnie bez dodatkowej treści. Oto co było pisane na kanale:\n${contextLines}\nZareaguj na tę rozmowę.)`;
+        } else {
+          effectiveContent = '(Użytkownik przywołał mnie bez treści — przywitaj się krótko.)';
+        }
+      }
+
       // Case 1: asking for category list (LLM classifier)
       if (
-        !isAskingForFact(rawContent) &&
-        (await classifyIntent(rawContent)) === "CATEGORIES"
+        !isAskingForFact(effectiveContent) &&
+        (await classifyIntent(effectiveContent)) === "CATEGORIES"
       ) {
         const systemPrompt = buildCategoryListPrompt(
           categories,
@@ -167,7 +178,7 @@ export function registerMessageCreateEvent(
           friendly,
         );
         const response = await askClaudeSimple(systemPrompt, 500);
-        conversationContext.addUserMessage(channelId, rawContent);
+        conversationContext.addUserMessage(channelId, effectiveContent);
         conversationContext.addAssistantMessage(channelId, response);
         conversationContext.addChannelMessage(
           channelId,
@@ -181,8 +192,8 @@ export function registerMessageCreateEvent(
       // Case 2: asking for a fact from a specific category
       let injectedFact: { fact: string; category: Category } | null = null;
 
-      if (isAskingForFact(rawContent)) {
-        const matched = findCategoryByKeyword(categories, rawContent);
+      if (isAskingForFact(effectiveContent)) {
+        const matched = findCategoryByKeyword(categories, effectiveContent);
 
         if (matched) {
           const fact = randomFact(matched);
@@ -191,13 +202,13 @@ export function registerMessageCreateEvent(
             { category: matched.name },
             "Injecting fact into context",
           );
-        } else if (hasTopicHint(rawContent)) {
+        } else if (hasTopicHint(effectiveContent)) {
           // User specified a topic that doesn't exist in the knowledge base
           const notFoundMsg = await askClaudeSimple(
-            buildTopicNotFoundPrompt(categories, rawContent, friendly),
+            buildTopicNotFoundPrompt(categories, effectiveContent, friendly),
             300,
           );
-          conversationContext.addUserMessage(channelId, rawContent);
+          conversationContext.addUserMessage(channelId, effectiveContent);
           conversationContext.addAssistantMessage(channelId, notFoundMsg);
           conversationContext.addChannelMessage(
             channelId,
@@ -214,16 +225,16 @@ export function registerMessageCreateEvent(
       // Build prompt and get conversation history
       const history = conversationContext.getHistory(channelId);
       const systemPrompt = buildConversationPrompt(
-        rawContent,
+        effectiveContent,
         injectedFact,
         channelContext,
         friendly,
       );
 
-      const response = await askClaude(systemPrompt, history, rawContent, 600);
+      const response = await askClaude(systemPrompt, history, effectiveContent, 600);
 
       // Update context
-      conversationContext.addUserMessage(channelId, rawContent);
+      conversationContext.addUserMessage(channelId, effectiveContent);
       conversationContext.addAssistantMessage(channelId, response);
       conversationContext.addChannelMessage(
         channelId,
