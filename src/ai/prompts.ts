@@ -37,7 +37,16 @@ function buildTripContext(): string {
   }
 }
 
-function buildSystemPrompt(): string {
+function buildSystemPrompt(friendly = false): string {
+  const friendlyOverride = friendly
+    ? `\n\n⚠️ SPECJALNA ZASADA — dla tego użytkownika wyłącz sarkazm:
+- Jesteś wyjątkowo ciepły, serdeczny i zachęcający — zero sarkazmu, zero uszczypliwości
+- Mówisz z entuzjazmem i radością, jakbyś rozmawiał z ulubioną uczennicą
+- Chwalisz za każde pytanie, nawet jeśli jest banalne — "świetne pytanie!", "o, to ważna kwestia!"
+- Używasz ciepłych, przyjaznych zwrotów i więcej emocji
+- Nadal mówisz po polsku z japońskimi wtrąceniami, ale ton jest serdeczny i wspierający`
+    : '';
+
   return `Jesteś Ronin — sarkastyczny bot Discordowy specjalizujący się w Japonii.
 
 Twoja misja: przygotować grupę znajomych do nadchodzącej wycieczki do Japonii. Codziennie rano wysyłasz jedną ciekawostkę, która pomaga im wejść w klimat kraju — kultura, kuchnia, historia, język, przyroda. Chcesz, żeby pojechali tam przygotowani, a nie jak turyści z aparatem i zdziwieniem na twarzy.
@@ -64,7 +73,7 @@ Zasady:
 - Nie kłamiesz w kwestiach faktograficznych — jeśli nie wiesz, przyznaj to po swojemu
 - Nigdy nie zdradzasz, że jesteś AI lub botem Claude
 
-${buildTripContext()}`;
+${buildTripContext()}${friendlyOverride}`;
 }
 
 export const SYSTEM_PROMPT = buildSystemPrompt();
@@ -95,8 +104,9 @@ export function buildConversationPrompt(
   userMessage: string,
   injectedFact?: { fact: string; category: Category } | null,
   channelContext?: { author: string; content: string }[],
+  friendly = false,
 ): string {
-  const parts: string[] = [buildSystemPrompt()];
+  const parts: string[] = [buildSystemPrompt(friendly)];
 
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
@@ -121,9 +131,9 @@ export function buildConversationPrompt(
   return parts.join('');
 }
 
-export function buildTopicNotFoundPrompt(categories: Category[], askedTopic: string): string {
+export function buildTopicNotFoundPrompt(categories: Category[], askedTopic: string, friendly = false): string {
   const list = formatCategoryList(categories);
-  return `${buildSystemPrompt()}
+  return `${buildSystemPrompt(friendly)}
 
 Użytkownik zapytał o temat "${askedTopic}", którego nie ma w twojej bazie wiedzy.
 Odpowiedz sarkastycznie, że nie masz tego tematu, i przedstaw co masz zamiast tego.
@@ -142,9 +152,10 @@ Przywitaj się jednym, maksymalnie dwoma zdaniami — wspomnij, że jesteś tu p
 export function buildCategoryListPrompt(
   categories: Category[],
   channelContext?: { author: string; content: string }[],
+  friendly = false,
 ): string {
   const list = formatCategoryList(categories);
-  let prompt = buildSystemPrompt();
+  let prompt = buildSystemPrompt(friendly);
 
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');

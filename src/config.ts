@@ -36,4 +36,7 @@ export const config = {
   trip: {
     departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,
   },
+  specialUsers: {
+    friendlyUserId: process.env.FRIENDLY_USER_ID ?? null,
+  },
 } as const;

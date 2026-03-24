@@ -1,4 +1,4 @@
-import { Client, Message, TextChannel } from "discord.js";
+import { Client, Message, TextChannel, ThreadChannel } from "discord.js";
 import { logger } from "../../utils/logger";
 import {
   Category,
@@ -95,6 +95,7 @@ export function registerMessageCreateEvent(
 
       const channelId = message.channelId;
       const userId = message.author.id;
+      const friendly = !!config.specialUsers.friendlyUserId && userId === config.specialUsers.friendlyUserId;
 
       // Strip mention from message content
       const rawContent = message.content.replace(/<@!?\d+>/g, "").trim();
@@ -119,7 +120,7 @@ export function registerMessageCreateEvent(
       }
 
       logger.info(
-        { userId, channelId, content: rawContent.slice(0, 80) },
+        { userId, channelId, content: rawContent.slice(0, 80), friendly },
         "Handling message",
       );
 
@@ -132,9 +133,28 @@ export function registerMessageCreateEvent(
       }
 
       // Build channel context once — always injected so bot has full picture
-      const channelContext = conversationContext
+      let channelContext = conversationContext
         .getChannelBuffer(channelId)
         .filter((m) => m.content !== rawContent);
+
+      // If we're in a thread, prepend the thread starter message as extra context
+      if (message.channel.isThread()) {
+        const starterMessage = await (message.channel as ThreadChannel)
+          .fetchStarterMessage()
+          .catch(() => null);
+        if (starterMessage) {
+          const starterEntry = {
+            author: starterMessage.author.displayName,
+            content: starterMessage.content.replace(/<@!?\d+>/g, "").trim(),
+          };
+          const alreadyPresent = channelContext.some(
+            (m) => m.content === starterEntry.content,
+          );
+          if (!alreadyPresent && starterEntry.content) {
+            channelContext = [starterEntry, ...channelContext];
+          }
+        }
+      }
 
       // Case 1: asking for category list (LLM classifier)
       if (
@@ -144,6 +164,7 @@ export function registerMessageCreateEvent(
         const systemPrompt = buildCategoryListPrompt(
           categories,
           channelContext,
+          friendly,
         );
         const response = await askClaudeSimple(systemPrompt, 500);
         conversationContext.addUserMessage(channelId, rawContent);
@@ -173,7 +194,7 @@ export function registerMessageCreateEvent(
         } else if (hasTopicHint(rawContent)) {
           // User specified a topic that doesn't exist in the knowledge base
           const notFoundMsg = await askClaudeSimple(
-            buildTopicNotFoundPrompt(categories, rawContent),
+            buildTopicNotFoundPrompt(categories, rawContent, friendly),
             300,
           );
           conversationContext.addUserMessage(channelId, rawContent);
@@ -196,6 +217,7 @@ export function registerMessageCreateEvent(
         rawContent,
         injectedFact,
         channelContext,
+        friendly,
       );
 
       const response = await askClaude(systemPrompt, history, rawContent, 600);
