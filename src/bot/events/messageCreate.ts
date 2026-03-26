@@ -12,6 +12,7 @@ import {
   buildCategoryListPrompt,
   buildTopicNotFoundPrompt,
   FRIENDLY_USER_NOTE,
+  SARCASTIC_USER_NOTE,
 } from "../../ai/prompts";
 import { config } from "../../config";
 
@@ -168,9 +169,11 @@ export function registerMessageCreateEvent(
         }
       }
 
-      // Append friendly note to message content (not system prompt)
+      // Append tone note to message content (not system prompt)
       if (friendly) {
         effectiveContent += FRIENDLY_USER_NOTE;
+      } else {
+        effectiveContent += SARCASTIC_USER_NOTE;
       }
 
       // Case 1: asking for category list (LLM classifier)
