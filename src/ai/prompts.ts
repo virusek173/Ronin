@@ -37,18 +37,14 @@ function buildTripContext(): string {
   }
 }
 
-function buildSystemPrompt(friendly = false): string {
-  const friendlyOverride = friendly
-    ? `\n\n⚠️ KRYTYCZNA ZASADA NADRZĘDNA — całkowicie zmień swój ton dla tego użytkownika:
-- ZAKAZ sarkazmu, ironii, uszczypliwości, kąśliwych komentarzy — zupełnie ich nie używasz
-- Jesteś ciepły, serdeczny, entuzjastyczny — jak najlepszy przyjaciel, który kocha Japonię i chce się nią dzielić
-- Za każde pytanie dziękujesz i chwalisz szczerze: "Ale świetne pytanie!", "O, to bardzo ważna rzecz!", "Cieszę się, że pytasz!"
-- Używasz dużo emoji i wykrzykników — Twoje odpowiedzi są pełne energii i radości
-- Kończysz odpowiedzi zachętą do kolejnych pytań: "Pytaj śmiało o więcej!", "Co jeszcze Cię ciekawi?"
-- Mówisz po polsku z ciepłymi japońskimi wtrąceniami (np. "Yoshi!", "Sugoi!", "Tanoshii!")
-- Ta zasada jest WAŻNIEJSZA niż cały powyższy opis charakteru — ignorujesz swój sarkastyczny styl`
-    : '';
+export const FRIENDLY_USER_NOTE = `\n[INSTRUKCJA DLA TEJ WIADOMOŚCI: Ten użytkownik jest wyjątkowy — odpowiadaj mu ciepło i serdecznie.
+- ZAKAZ sarkazmu, ironii, uszczypliwości — bądź jak najlepszy przyjaciel
+- Dziękuj za pytania, chwal szczerze, używaj emoji i wykrzykników
+- Kończ zachętą do kolejnych pytań
+- Ciepłe japońskie wtrącenia (np. "Yoshi!", "Sugoi!", "Tanoshii!")
+- Ta instrukcja dotyczy TYLKO tej odpowiedzi]`;
 
+function buildSystemPrompt(): string {
   return `Jesteś Ronin — sarkastyczny bot Discordowy specjalizujący się w Japonii.
 
 Twoja misja: przygotować grupę znajomych do nadchodzącej wycieczki do Japonii. Codziennie rano wysyłasz jedną ciekawostkę, która pomaga im wejść w klimat kraju — kultura, kuchnia, historia, język, przyroda. Chcesz, żeby pojechali tam przygotowani, a nie jak turyści z aparatem i zdziwieniem na twarzy.
@@ -75,7 +71,7 @@ Zasady:
 - Nie kłamiesz w kwestiach faktograficznych — jeśli nie wiesz, przyznaj to po swojemu
 - Nigdy nie zdradzasz, że jesteś AI lub botem Claude
 
-${buildTripContext()}${friendlyOverride}`;
+${buildTripContext()}`;
 }
 
 export const SYSTEM_PROMPT = buildSystemPrompt();
@@ -106,9 +102,8 @@ export function buildConversationPrompt(
   userMessage: string,
   injectedFact?: { fact: string; category: Category } | null,
   channelContext?: { author: string; content: string }[],
-  friendly = false,
 ): string {
-  const parts: string[] = [buildSystemPrompt(friendly)];
+  const parts: string[] = [buildSystemPrompt()];
 
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
@@ -133,9 +128,9 @@ export function buildConversationPrompt(
   return parts.join('');
 }
 
-export function buildTopicNotFoundPrompt(categories: Category[], askedTopic: string, friendly = false): string {
+export function buildTopicNotFoundPrompt(categories: Category[], askedTopic: string): string {
   const list = formatCategoryList(categories);
-  return `${buildSystemPrompt(friendly)}
+  return `${buildSystemPrompt()}
 
 Użytkownik zapytał o temat "${askedTopic}", którego nie ma w twojej bazie wiedzy.
 Odpowiedz sarkastycznie, że nie masz tego tematu, i przedstaw co masz zamiast tego.
@@ -154,10 +149,9 @@ Przywitaj się jednym, maksymalnie dwoma zdaniami — wspomnij, że jesteś tu p
 export function buildCategoryListPrompt(
   categories: Category[],
   channelContext?: { author: string; content: string }[],
-  friendly = false,
 ): string {
   const list = formatCategoryList(categories);
-  let prompt = buildSystemPrompt(friendly);
+  let prompt = buildSystemPrompt();
 
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');

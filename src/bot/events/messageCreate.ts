@@ -11,6 +11,7 @@ import {
   buildConversationPrompt,
   buildCategoryListPrompt,
   buildTopicNotFoundPrompt,
+  FRIENDLY_USER_NOTE,
 } from "../../ai/prompts";
 import { config } from "../../config";
 
@@ -167,6 +168,11 @@ export function registerMessageCreateEvent(
         }
       }
 
+      // Append friendly note to message content (not system prompt)
+      if (friendly) {
+        effectiveContent += FRIENDLY_USER_NOTE;
+      }
+
       // Case 1: asking for category list (LLM classifier)
       if (
         !isAskingForFact(effectiveContent) &&
@@ -175,7 +181,6 @@ export function registerMessageCreateEvent(
         const systemPrompt = buildCategoryListPrompt(
           categories,
           channelContext,
-          friendly,
         );
         const response = await askClaudeSimple(systemPrompt, 500);
         conversationContext.addUserMessage(channelId, effectiveContent);
@@ -205,7 +210,7 @@ export function registerMessageCreateEvent(
         } else if (hasTopicHint(effectiveContent)) {
           // User specified a topic that doesn't exist in the knowledge base
           const notFoundMsg = await askClaudeSimple(
-            buildTopicNotFoundPrompt(categories, effectiveContent, friendly),
+            buildTopicNotFoundPrompt(categories, effectiveContent),
             300,
           );
           conversationContext.addUserMessage(channelId, effectiveContent);
@@ -228,7 +233,6 @@ export function registerMessageCreateEvent(
         effectiveContent,
         injectedFact,
         channelContext,
-        friendly,
       );
 
       const response = await askClaude(systemPrompt, history, effectiveContent, 600);
