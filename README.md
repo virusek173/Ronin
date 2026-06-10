@@ -1,12 +1,14 @@
 # Ronin
 
-Sarcastic Discord bot about Japan. Sends a daily fun fact at 6:00 AM, answers questions, and holds contextual conversations — powered by Claude API.
+Sarcastic Discord bot about Japan. From June 11, 2026, sends daily trip memories instead of facts. Answers questions and holds contextual conversations — powered by Claude API.
 
 ---
 
 ## Features
 
-- **Daily fun fact** — every morning at 6:00 AM (Europe/Warsaw) the bot posts one fact to a designated channel. No repeats — it cycles through all 224 facts across 8 categories before resetting.
+- **Daily morning message** — every day at 6:00 AM (Europe/Warsaw) the bot posts to a designated channel:
+  - **Phase 1 — Trip memories** (from `DIARY_START_DATE`): posts one diary entry per day in chronological order, with an enthusiastic/celebratory tone. 20 entries total.
+  - **Phase 2 — Daily facts** (after memories run out): cycles through 224 facts across 8 categories. No repeats until all are exhausted.
 - **Conversational interaction** — responds to `@Ronin` mentions or replies to its messages. Maintains per-channel conversation context.
 - **Category-specific facts** — `@Ronin tell me something about cuisine` draws a random fact from the matching category.
 - **Category list** — `@Ronin what categories do you have?` returns the full list with emoji and fact counts.
@@ -33,13 +35,25 @@ To add a new category, create a `.md` file in `knowledge-base/` with the header 
 
 ---
 
+## Trip Diary
+
+Daily memories are loaded from a local `Dziennik/` directory (gitignored — not in the repo). Files must follow the naming convention:
+
+```
+YYYY.MM.DD Japonia dzień N.md
+```
+
+The bot reads **full file content** for each entry and presents it through Claude with an enthusiastic tone. Files are sorted by date prefix; the bot picks the entry matching `today - DIARY_START_DATE` as the day offset.
+
+---
+
 ## Tech Stack
 
 | Component | Technology |
 |---|---|
 | Runtime | Node.js >= 20 + TypeScript |
 | Discord | `discord.js` v14 |
-| AI | `@anthropic-ai/sdk` — model `claude-sonnet-4-5` (configurable) |
+| AI | `@anthropic-ai/sdk` — model `claude-haiku-4-5` (configurable) |
 | Scheduler | `node-cron` |
 | Logging | `pino` + `pino-pretty` |
 | Tracking | `data/tracker.json` |
@@ -59,6 +73,8 @@ ronin/
 │   ├── natura.md
 │   ├── codzienne-zycie.md
 │   └── mitologia.md
+├── Dziennik/             # Trip diary entries (gitignored, local only)
+│   └── YYYY.MM.DD Japonia dzień N.md
 ├── data/
 │   └── tracker.json      # Fact cycle state (auto-generated)
 ├── src/
@@ -66,7 +82,7 @@ ronin/
 │   ├── config.ts         # Configuration from .env
 │   ├── bot/
 │   │   ├── client.ts         # Discord.js client
-│   │   ├── scheduler.ts      # Cron job — daily fact
+│   │   ├── scheduler.ts      # Cron job — daily memory or fact
 │   │   └── events/
 │   │       ├── ready.ts          # On ready — startup logs
 │   │       └── messageCreate.ts  # Mention/reply handler
@@ -77,7 +93,8 @@ ronin/
 │   ├── knowledge/
 │   │   ├── loader.ts         # MD file parser + category matching
 │   │   ├── categories.ts     # Category formatting helpers
-│   │   └── tracker.ts        # Sent facts tracking
+│   │   ├── tracker.ts        # Sent facts tracking
+│   │   └── diary.ts          # Trip diary loader
 │   └── utils/
 │       └── logger.ts         # Pino logger
 ├── .env.example
@@ -144,10 +161,9 @@ A successful startup looks like:
 ```
 INFO: Loaded 8 categories
 INFO: Tracker initialized { remaining: 224 }
+INFO: Diary entries loaded { count: 20 }
 INFO: Daily scheduler started (06:00 Europe/Warsaw)
 INFO: Bot connected as Ronin#XXXX
-INFO: Total facts in pool: 224
-INFO: Facts remaining in current cycle: 224
 ```
 
 ---
@@ -158,12 +174,14 @@ INFO: Facts remaining in current cycle: 224
 |---|---|---|---|
 | `DISCORD_TOKEN` | Yes | — | Bot token from Discord Developer Portal |
 | `DISCORD_CLIENT_ID` | Yes | — | Application ID from Discord Developer Portal |
-| `DAILY_CHANNEL_ID` | Yes | — | Channel ID for daily facts |
+| `DAILY_CHANNEL_ID` | Yes | — | Channel ID for daily messages |
 | `ANTHROPIC_API_KEY` | Yes | — | Anthropic API key |
-| `CLAUDE_MODEL` | No | `claude-sonnet-4-5` | Claude model to use |
+| `CLAUDE_MODEL` | No | `claude-haiku-4-5` | Claude model to use |
 | `CONVERSATION_CONTEXT_LIMIT` | No | `8` | Number of recent messages kept in context |
 | `CONVERSATION_TIMEOUT_MS` | No | `3600000` | Conversation context timeout (ms), default 1h |
-| `CRON_EXPRESSION` | No | `0 6 * * *` | Cron schedule for daily facts |
+| `CRON_EXPRESSION` | No | `0 6 * * *` | Cron schedule for daily messages |
+| `DIARY_START_DATE` | No | `2026-06-11` | Date from which diary replay begins (YYYY-MM-DD) |
+| `DIARY_PATH` | No | `./Dziennik` | Path to diary entries directory |
 | `LOG_LEVEL` | No | `info` | Log level (`debug`, `info`, `warn`, `error`) |
 | `TZ` | No | `Europe/Warsaw` | Timezone |
 
