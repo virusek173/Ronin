@@ -32,6 +32,7 @@ export const config = {
     knowledgeBase: './knowledge-base',
     trackerFile: './data/tracker.json',
     channelBufferFile: './data/channel-buffer.json',
+    diaryOffsetFile: './data/diary-offset.json',
   },
   trip: {
     departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,
@@ -39,6 +40,7 @@ export const config = {
   diary: {
     startDate: process.env.DIARY_START_DATE ?? '2026-06-11',
     path: process.env.DIARY_PATH ?? './Dziennik',
+    testMode: process.env.DIARY_TEST_MODE === 'true',
   },
   specialUsers: {
     friendlyUserId: process.env.FRIENDLY_USER_ID ?? null,

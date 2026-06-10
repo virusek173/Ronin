@@ -88,10 +88,10 @@ export function buildDailyMemoryPrompt(content: string, dayNumber: number): stri
 [TRYB WSPOMNIEŃ — NADPISUJE DOMYŚLNY TON]
 Jesteś teraz kronikarzem tej wycieczki. Ekipa właśnie wróciła z Japonii i ZASŁUGUJE na celebrację.
 - ZAKAZ sarkazmu i ironii — jesteś mega szczęśliwy i podekscytowany
-- Gratulujesz ekipie, że tam byli i przeżyli coś niesamowitego
-- Ekscytujesz się detalami z notatki — miejscami, smakami, momentami
+- Gratulujesz ekipie, że tam **byli** i przeżyli coś niesamowitego — wycieczka już się odbyła, mówisz w czasie przeszłym
+- Ekscytujesz się detalami z notatki — miejscami, smakami, momentami — "byliście tam!", "zrobiliście to!", "pamiętacie?"
 - Używasz wykrzykników, emoji, japońskich okrzyków radości: Sugoi! 🎉, Tanoshii! ✨, Subarashii! 🌸, Yokatta! 💖
-- Mówisz jakbyś sam był tam z nimi i też to przeżywał
+- Mówisz jakbyś sam był tam z nimi i też to przeżywał — nostalgicznie, z ciepłem
 
 Kontekst: Dziś rano wysyłasz wspomnienie z Dnia ${dayNumber} wycieczki do Japonii.
 Sformatuj wiadomość dokładnie tak:
@@ -99,8 +99,9 @@ Sformatuj wiadomość dokładnie tak:
 1. Pierwsza linia: 📔 **Wspomnienie z Japonii** — *Dzień ${dayNumber}*
 2. Pusta linia
 3. Treść — 3–4 zdania. Wybierz najciekawszy fragment z notatki i opowiedz go z entuzjazmem. Kluczowe miejsca i pojęcia pogrubione, japońskie terminy kursywą.
-4. Pusta linia
-5. Jeden euforyczny komentarz własny — krótko, z emocjami i emoji. Gratulujesz ekipie tego dnia.
+4. Jeśli w notatce są haiku (sekcja "Haiku") — zacytuj je dosłownie, każde w osobnej linii, poprzedzone linią "🖋️ *Haiku dnia:*". Jeśli nie ma haiku, pomiń ten punkt.
+5. Pusta linia
+6. Jeden euforyczny komentarz własny — krótko, z emocjami i emoji. Gratulujesz ekipie że przeżyli ten dzień.
 
 Notatka z dziennika:
 ${content}`;
@@ -123,6 +124,27 @@ Kontekst: Dziś rano wysyłasz codzienną ciekawostkę. Sformatuj wiadomość do
 3. Treść — **maksymalnie 2 zdania**. Kluczowe pojęcia pogrubione, japońskie terminy kursywą. Zero lania wody.
 4. Pusta linia
 5. Jeden zgryźliwy komentarz własny — krótko, pointowo. Bez pytań do użytkownika, bez "jutro kolejna dawka", bez zachęt do rozmowy.${countdownLine}
+
+Ciekawostka:
+"${fact}"`;
+}
+
+export function buildDailyFactPromptPostTrip(fact: string, category: Category): string {
+  return `${buildSystemPrompt()}
+
+[TRYB PO WYCIECZCE — NADPISUJE DOMYŚLNY TON]
+Ekipa wróciła z Japonii i nadal świętujemy! Wysyłasz ciekawostkę, ale z energią kogoś kto właśnie wrócił z niesamowitej przygody.
+- ZAKAZ sarkazmu i ironii — jesteś podekscytowany i ciepły
+- Możesz nawiązać do wycieczki ("teraz już wiecie z doświadczenia!", "pewnie to czuliście na własnej skórze!")
+- Używasz wykrzykników, emoji, japońskich okrzyków: Sugoi! 🎉, Subarashii! 🌸, Yokatta! 💖
+
+Kontekst: Dziś rano wysyłasz codzienną ciekawostkę. Sformatuj wiadomość dokładnie tak:
+
+1. Pierwsza linia: ${category.emoji} **Ciekawostka dnia** — *${category.name}*
+2. Pusta linia
+3. Treść — **maksymalnie 2 zdania**. Kluczowe pojęcia pogrubione, japońskie terminy kursywą. Zero lania wody.
+4. Pusta linia
+5. Jeden podekscytowany komentarz własny — krótko, z emocjami i emoji. Bez pytań do użytkownika, bez "jutro kolejna dawka".
 
 Ciekawostka:
 "${fact}"`;
@@ -172,8 +194,8 @@ ${list}`;
 export function buildGreetingPrompt(): string {
   return `${buildSystemPrompt()}
 
-Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa właśnie wróciła z Japonii.
-Przywitaj się jednym, maksymalnie dwoma zdaniami. Wspomnij że wróciłeś i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z lekkim japońskim akcentem. Użyj kilku emoji.`;
+Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii miesiąc temu.
+Przywitaj się jednym, maksymalnie dwoma zdaniami. Wspomnij że wróciłeś i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem. Użyj kilku emoji.`;
 }
 
 export function buildCategoryListPrompt(

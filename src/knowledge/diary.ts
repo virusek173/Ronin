@@ -59,3 +59,25 @@ export function loadDiaryEntry(dayOffset: number): DiaryEntry | null {
 export function diaryEntryCount(): number {
   return loadAllEntries().length;
 }
+
+export function loadTestOffset(): number {
+  try {
+    if (fs.existsSync(config.paths.diaryOffsetFile)) {
+      const raw = fs.readFileSync(config.paths.diaryOffsetFile, 'utf-8');
+      return JSON.parse(raw).offset ?? 0;
+    }
+  } catch {
+    logger.warn('Failed to read diary offset file, starting from 0');
+  }
+  return 0;
+}
+
+export function saveTestOffset(offset: number): void {
+  try {
+    const dir = path.dirname(config.paths.diaryOffsetFile);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(config.paths.diaryOffsetFile, JSON.stringify({ offset }), 'utf-8');
+  } catch (err) {
+    logger.error({ err }, 'Failed to save diary offset');
+  }
+}
