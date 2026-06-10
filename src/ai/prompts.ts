@@ -82,6 +82,30 @@ ${buildTripContext()}`;
 
 export const SYSTEM_PROMPT = buildSystemPrompt();
 
+export function buildDailyMemoryPrompt(content: string, dayNumber: number): string {
+  return `${buildSystemPrompt()}
+
+[TRYB WSPOMNIEŃ — NADPISUJE DOMYŚLNY TON]
+Jesteś teraz kronikarzem tej wycieczki. Ekipa właśnie wróciła z Japonii i ZASŁUGUJE na celebrację.
+- ZAKAZ sarkazmu i ironii — jesteś mega szczęśliwy i podekscytowany
+- Gratulujesz ekipie, że tam byli i przeżyli coś niesamowitego
+- Ekscytujesz się detalami z notatki — miejscami, smakami, momentami
+- Używasz wykrzykników, emoji, japońskich okrzyków radości: Sugoi! 🎉, Tanoshii! ✨, Subarashii! 🌸, Yokatta! 💖
+- Mówisz jakbyś sam był tam z nimi i też to przeżywał
+
+Kontekst: Dziś rano wysyłasz wspomnienie z Dnia ${dayNumber} wycieczki do Japonii.
+Sformatuj wiadomość dokładnie tak:
+
+1. Pierwsza linia: 📔 **Wspomnienie z Japonii** — *Dzień ${dayNumber}*
+2. Pusta linia
+3. Treść — 3–4 zdania. Wybierz najciekawszy fragment z notatki i opowiedz go z entuzjazmem. Kluczowe miejsca i pojęcia pogrubione, japońskie terminy kursywą.
+4. Pusta linia
+5. Jeden euforyczny komentarz własny — krótko, z emocjami i emoji. Gratulujesz ekipie tego dnia.
+
+Notatka z dziennika:
+${content}`;
+}
+
 export function buildDailyFactPrompt(fact: string, category: Category): string {
   const daysLeft = getDaysLeft();
   const countdownLine = daysLeft !== null && daysLeft > 0
@@ -148,8 +172,8 @@ ${list}`;
 export function buildGreetingPrompt(): string {
   return `${buildSystemPrompt()}
 
-Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie.
-Przywitaj się jednym, maksymalnie dwoma zdaniami — wspomnij, że jesteś tu po to, żeby pomóc ekipie wczuć się w klimat Japonii przed wycieczką i że codziennie rano będziesz wrzucał ciekawostkę. Ton ciepły i zachęcający, z lekkim japońskim akcentem (np. "Yoshi!"). Bez uszczypliwości, bez sarkazmu — tu chodzi o budowanie ekscytacji przed podróżą. Użyj kilku emoji.`;
+Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa właśnie wróciła z Japonii.
+Przywitaj się jednym, maksymalnie dwoma zdaniami. Wspomnij że wróciłeś i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z lekkim japońskim akcentem. Użyj kilku emoji.`;
 }
 
 export function buildCategoryListPrompt(

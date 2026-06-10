@@ -36,6 +36,10 @@ export const config = {
   trip: {
     departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,
   },
+  diary: {
+    startDate: process.env.DIARY_START_DATE ?? '2026-06-11',
+    path: process.env.DIARY_PATH ?? './Dziennik',
+  },
   specialUsers: {
     friendlyUserId: process.env.FRIENDLY_USER_ID ?? null,
   },

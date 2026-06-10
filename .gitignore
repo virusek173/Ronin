@@ -5,3 +5,4 @@ data/tracker.json
 *.js.map
 .claude/
 data/channel-buffer.json
+Dziennik/
