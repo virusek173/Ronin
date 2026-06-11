@@ -1,4 +1,4 @@
-.PHONY: up down restart logs
+.PHONY: up down restart restart-hard logs
 
 up:
 	docker compose up -d --build
@@ -8,6 +8,10 @@ down:
 
 restart:
 	docker compose restart
+
+restart-hard:
+	$(MAKE) down
+	$(MAKE) up
 
 logs:
 	docker compose logs -f
