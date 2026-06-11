@@ -38,7 +38,7 @@ export const config = {
     departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,
   },
   diary: {
-    startDate: process.env.DIARY_START_DATE ?? '2026-06-11',
+    startDate: process.env.DIARY_START_DATE ?? '2026-06-12',
     path: process.env.DIARY_PATH ?? './Dziennik',
     testMode: process.env.DIARY_TEST_MODE === 'true',
   },
