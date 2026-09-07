@@ -1,6 +1,38 @@
 import { Category } from '../knowledge/loader';
 import { formatCategoryList } from '../knowledge/categories';
+import { getTripEndDate } from '../knowledge/diary';
 import { config } from '../config';
+
+// Polish plural forms: 1 -> singular, 2-4 (excluding 12-14) -> "few" form,
+// everything else -> "many" form.
+function polishPlural(n: number, one: string, few: string, many: string): string {
+  if (n === 1) return one;
+  const lastDigit = n % 10;
+  const lastTwo = n % 100;
+  if (lastDigit >= 2 && lastDigit <= 4 && !(lastTwo >= 12 && lastTwo <= 14)) return few;
+  return many;
+}
+
+function describeElapsedSince(date: Date): string {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const from = new Date(date);
+  from.setHours(0, 0, 0, 0);
+  const days = Math.max(0, Math.floor((today.getTime() - from.getTime()) / 86_400_000));
+
+  if (days === 0) return 'dzisiaj';
+  if (days === 1) return 'wczoraj';
+  if (days < 7) return `${days} ${polishPlural(days, 'dzień', 'dni', 'dni')} temu`;
+
+  const weeks = Math.round(days / 7);
+  if (days < 30) return `${weeks} ${polishPlural(weeks, 'tydzień', 'tygodnie', 'tygodni')} temu`;
+
+  const months = Math.round(days / 30);
+  if (months < 12) return `${months} ${polishPlural(months, 'miesiąc', 'miesiące', 'miesięcy')} temu`;
+
+  const years = Math.round(days / 365);
+  return `${years} ${polishPlural(years, 'rok', 'lata', 'lat')} temu`;
+}
 
 function getDaysLeft(): number | null {
   const { departureDate } = config.trip;
@@ -192,9 +224,12 @@ ${list}`;
 }
 
 export function buildGreetingPrompt(): string {
+  const tripEndDate = getTripEndDate();
+  const elapsed = tripEndDate ? describeElapsedSince(tripEndDate) : 'jakiś czas temu';
+
   return `${buildSystemPrompt()}
 
-Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii miesiąc temu.
+Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii ${elapsed}.
 Przywitaj się jednym, maksymalnie dwoma zdaniami. Wspomnij że wróciłeś i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem. Użyj kilku emoji.`;
 }
 

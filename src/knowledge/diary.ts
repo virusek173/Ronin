@@ -6,6 +6,7 @@ import { logger } from '../utils/logger';
 export interface DiaryEntry {
   content: string;
   dayNumber: number;
+  date: string;
 }
 
 function parseDayNumber(filename: string): number {
@@ -43,7 +44,8 @@ function loadAllEntries(): DiaryEntry[] {
     const fullPath = path.join(diaryPath, filename);
     const content = fs.readFileSync(fullPath, 'utf-8');
     const dayNumber = parseDayNumber(filename);
-    return { content, dayNumber };
+    const date = parseDatePrefix(filename)!;
+    return { content, dayNumber, date };
   });
 
   logger.info({ count: cachedEntries.length }, 'Diary entries loaded');
@@ -58,6 +60,17 @@ export function loadDiaryEntry(dayOffset: number): DiaryEntry | null {
 
 export function diaryEntryCount(): number {
   return loadAllEntries().length;
+}
+
+// Real calendar date of the last diary entry (i.e. when the trip actually
+// ended), used for phrasing like "wrócili X temu" — independent of the
+// looping day counter used to pick which entry to post.
+export function getTripEndDate(): Date | null {
+  const entries = loadAllEntries();
+  if (entries.length === 0) return null;
+  const lastDate = entries[entries.length - 1].date;
+  const [year, month, day] = lastDate.split('.').map(Number);
+  return new Date(year, month - 1, day);
 }
 
 // Persistent day counter: starts at 0 on first run, advances by one on
