@@ -11,9 +11,10 @@ import {
 import { askClaudeSimple } from "../ai/claude";
 import { config } from "../config";
 import {
+  diaryEntryCount,
   loadDiaryEntry,
-  loadTestOffset,
-  saveTestOffset,
+  loadDiaryOffset,
+  saveDiaryOffset,
 } from "../knowledge/diary";
 
 export function startDailyScheduler(
@@ -42,21 +43,17 @@ export function startDailyScheduler(
           return;
         }
 
-        let dayOffset: number;
-        if (testMode) {
-          dayOffset = loadTestOffset();
-          saveTestOffset(dayOffset + 1);
-        } else {
-          const startDate = new Date(config.diary.startDate);
-          startDate.setHours(0, 0, 0, 0);
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          dayOffset = Math.floor(
-            (today.getTime() - startDate.getTime()) / 86_400_000,
-          );
+        // Persistent day counter: day 0 on first run, then +1 on every
+        // firing, wrapping back to 0 once the last entry is reached so the
+        // diary replays from the start in an endless loop.
+        const entryCount = diaryEntryCount();
+        let diaryEntry = null as ReturnType<typeof loadDiaryEntry>;
+        let dayOffset = -1;
+        if (entryCount > 0) {
+          dayOffset = loadDiaryOffset() % entryCount;
+          diaryEntry = loadDiaryEntry(dayOffset);
+          saveDiaryOffset((dayOffset + 1) % entryCount);
         }
-
-        const diaryEntry = dayOffset >= 0 ? loadDiaryEntry(dayOffset) : null;
 
         let systemPrompt: string;
         if (diaryEntry) {

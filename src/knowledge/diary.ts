@@ -60,7 +60,10 @@ export function diaryEntryCount(): number {
   return loadAllEntries().length;
 }
 
-export function loadTestOffset(): number {
+// Persistent day counter: starts at 0 on first run, advances by one on
+// every cron firing, and is wrapped (mod entry count) by the caller so the
+// diary replays from the beginning once the last entry is reached.
+export function loadDiaryOffset(): number {
   try {
     if (fs.existsSync(config.paths.diaryOffsetFile)) {
       const raw = fs.readFileSync(config.paths.diaryOffsetFile, 'utf-8');
@@ -72,7 +75,7 @@ export function loadTestOffset(): number {
   return 0;
 }
 
-export function saveTestOffset(offset: number): void {
+export function saveDiaryOffset(offset: number): void {
   try {
     const dir = path.dirname(config.paths.diaryOffsetFile);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
