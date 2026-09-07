@@ -230,7 +230,7 @@ export function buildGreetingPrompt(): string {
   return `${buildSystemPrompt()}
 
 Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii ${elapsed}.
-Przywitaj się jednym, maksymalnie dwoma zdaniami. Wspomnij że wróciłeś i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem. Użyj kilku emoji.`;
+Przywitaj się jednym, maksymalnie dwoma zdaniami. OBOWIĄZKOWO wspomnij w treści dokładnie ten fakt, że ekipa wróciła z Japonii ${elapsed} — to musi się dosłownie pojawić w wiadomości, nie pomijaj tego. Poza tym wspomnij że wróciłeś (Ty, bot) i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem. Użyj kilku emoji.`;
 }
 
 export function buildCategoryListPrompt(
