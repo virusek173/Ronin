@@ -48,11 +48,16 @@ export async function askClaudeSimple(systemPrompt: string, maxTokens = 600): Pr
 }
 
 export async function classifyIntent(userMessage: string): Promise<'CATEGORIES' | 'OTHER'> {
-  const result = await askClaude(
-    'Classify the user\'s message. Reply with exactly one word: CATEGORIES if they are asking for a list of available topics/categories, OTHER for anything else.',
-    [],
-    userMessage,
-    5,
-  );
-  return result.trim().toUpperCase().startsWith('CATEGORIES') ? 'CATEGORIES' : 'OTHER';
+  try {
+    const result = await askClaude(
+      'Classify the user\'s message. Reply with exactly one word: CATEGORIES if they are asking for a list of available topics/categories, OTHER for anything else.',
+      [],
+      userMessage,
+      20,
+    );
+    return result.trim().toUpperCase().startsWith('CATEGORIES') ? 'CATEGORIES' : 'OTHER';
+  } catch (err) {
+    logger.warn({ err }, 'classifyIntent failed, defaulting to OTHER so the message still gets a real reply');
+    return 'OTHER';
+  }
 }
