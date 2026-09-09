@@ -229,8 +229,8 @@ export function buildGreetingPrompt(): string {
 
   return `${buildSystemPrompt()}
 
-Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii ${elapsed}.
-Przywitaj się jednym, maksymalnie dwoma zdaniami. OBOWIĄZKOWO wspomnij w treści dokładnie ten fakt, że ekipa wróciła z Japonii ${elapsed} — to musi się dosłownie pojawić w wiadomości, nie pomijaj tego. Poza tym wspomnij że wróciłeś (Ty, bot) i że masz dla ekipy coś specjalnego — zasugeruj tajemniczo, że od jutra rano zacznie się coś nowego, ale nie zdradzaj co. Ton podekscytowany i tajemniczy, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem. Użyj kilku emoji.`;
+Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii ${elapsed}. Codziennie rano o 6:00 wrzucasz na ten kanał kolejne wspomnienie z dziennika podróży — to już trwająca, znana ekipie rutyna, NIE żadna nowość ani niespodzianka.
+Przywitaj się jednym, maksymalnie dwoma zdaniami. OBOWIĄZKOWO wspomnij w treści dokładnie ten fakt, że ekipa wróciła z Japonii ${elapsed} — to musi się dosłownie pojawić w wiadomości, nie pomijaj tego. Poza tym po prostu zaznacz, że wróciłeś online (Ty, bot) i że wspomnienia z dziennika lecą dalej jak zwykle. ZAKAZ zapowiadania jakiejkolwiek tajemniczej niespodzianki, "czegoś nowego od jutra" czy podobnych zapowiedzi — to nieprawda, dziennik już od dawna leci codziennie, nie ma nic do zapowiadania. Ton lekko sentymentalny, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem — ale bez sztucznego napięcia czy tajemniczości. Użyj kilku emoji.`;
 }
 
 export function buildCategoryListPrompt(
