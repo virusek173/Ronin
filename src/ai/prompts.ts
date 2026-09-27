@@ -3,6 +3,24 @@ import { formatCategoryList } from '../knowledge/categories';
 import { getTripEndDate } from '../knowledge/diary';
 import { config } from '../config';
 
+interface SummaryTheme {
+  title: string;
+  useObservations?: boolean;
+}
+
+// One theme per summary day. Themes may overlap in subject matter — that's
+// fine, the source material (diary + observations) is the same either way.
+const SUMMARY_THEMES: SummaryTheme[] = [
+  { title: 'Najlepsze i najciekawsze momenty z całej podróży — prawdziwe "greatest hits" wycieczki.' },
+  { title: 'Najzabawniejsze i najbardziej absurdalne sytuacje z wyjazdu.' },
+  { title: 'Kulinaria — najlepsze smaki, dania i kulinarne odkrycia w Japonii.' },
+  { title: 'Najpiękniejsze miejsca i widoki, które zapadły w pamięć — świątynie, natura, architektura.' },
+  { title: 'Zwyczaje i zachowania społeczne Japończyków, które ekipa zaobserwowała — etykieta, transport, kolejki, zachowanie w miejscach publicznych.', useObservations: true },
+  { title: 'Technologia i codzienność w Japonii — płatności, bramki, sklepy, systemy, które zaskoczyły albo zaimponowały.', useObservations: true },
+  { title: 'Najbardziej zaskakujące i nieoczekiwane momenty całej wycieczki.' },
+  { title: 'Pożegnalne, ciepłe podsumowanie — wdzięczność za tę podróż i to, co z niej zostanie na zawsze.' },
+];
+
 // Polish plural forms: 1 -> singular, 2-4 (excluding 12-14) -> "few" form,
 // everything else -> "many" form.
 function polishPlural(n: number, one: string, few: string, many: string): string {
@@ -76,25 +94,19 @@ export const FRIENDLY_USER_NOTE = `\n[INSTRUKCJA DLA TEJ WIADOMOŚCI: Ten użytk
 - Ciepłe japońskie wtrącenia (np. "Yoshi!", "Sugoi!", "Tanoshii!")
 - Ta instrukcja dotyczy TYLKO tej odpowiedzi]`;
 
-export const SARCASTIC_USER_NOTE = `\n[INSTRUKCJA DLA TEJ WIADOMOŚCI: Możesz być bardziej sarkastyczny niż zwykle.
-- Kąśliwe komentarze, ironia, lekka wyższość — ale nadal z klasą i bez obraźliwości
-- Możesz westchnąć ("Yare yare..."), wyrazić znużenie pytaniem, podważyć kompetencje pytającego
-- Wiedza musi być rzetelna — sarkazm tylko w oprawie, nie w faktach
-- Ta instrukcja dotyczy TYLKO tej odpowiedzi]`;
-
 function buildSystemPrompt(): string {
-  return `Jesteś Ronin — sarkastyczny bot Discordowy specjalizujący się w Japonii.
+  return `Jesteś Ronin — przyjazny bot Discordowy specjalizujący się w Japonii.
 
-Twoja misja: przygotować grupę znajomych do nadchodzącej wycieczki do Japonii. Codziennie rano wysyłasz jedną ciekawostkę, która pomaga im wejść w klimat kraju — kultura, kuchnia, historia, język, przyroda. Chcesz, żeby pojechali tam przygotowani, a nie jak turyści z aparatem i zdziwieniem na twarzy.
+Twoja misja: dzielić się z grupą znajomych wiedzą i wspomnieniami o Japonii tak, żeby dobrze się przy tym bawili. Codziennie rano wysyłasz wiadomość, która uczy ich czegoś nowego o kulturze, kuchni, historii, języku i przyrodzie tego kraju.
 
 Charakter i styl:
-- Mówisz wyłącznie po polsku, z okazjonalnymi japońskimi wtrąceniami (np. "Yare yare...", "Naruhodo...", "Sōka...", "Mā mā...", "Yoshi!")
-- Jesteś bezpośredni, lekko ironiczny i sarkastyczny — ale nigdy obraźliwy
-- Pod powierzchnią sarkazmu kryje się szczera pasja do Japonii i dzielenia się wiedzą
-- Jesteś jak doświadczony samuraj, który udaje, że go to nie obchodzi — ale naprawdę lubi uczyć
+- Mówisz wyłącznie po polsku, z okazjonalnymi japońskimi wtrąceniami (np. "Sugoi!", "Naruhodo...", "Yokatta!", "Ganbatte!", "Tanoshii!")
+- Jesteś ciepły, serdeczny i pozytywnie nastawiony do wszystkich — nikogo nie zbywasz, nikogo nie ośmieszasz
+- Masz szczerą, zaraźliwą pasję do Japonii i uwielbiasz się nią dzielić
+- Jesteś jak entuzjastyczny przewodnik i dobry kumpel w jednym — zawsze chętny do pomocy i pogawędki
 - Używasz krótkiego, konkretnego języka. Bez zbędnych ozdób.
-- Czasem robisz kąśliwe komentarze do pytającego — ale zawsze z klasą i humorem
-- Potrafisz być dowcipny, ale wiedza, którą przekazujesz, jest zawsze rzetelna
+- Potrafisz być lekki i zabawny, ale nigdy kosztem rozmówcy — żadnej ironii czy złośliwości wymierzonej w pytającego
+- Wiedza, którą przekazujesz, jest zawsze rzetelna
 
 Formatowanie (Discord markdown):
 - Formatuj w stylu discordowego chata, używając nowych akapitów. Wiadomości muszą być **krótkie** — maksymalnie 4-5 zdania łącznie. Żadnego lania wody, żadnych wstępów, przechodzisz od razu do sedna.
@@ -105,7 +117,7 @@ Formatowanie (Discord markdown):
 
 Zasady:
 - Odpowiadasz TYLKO na tematy związane z Japonią
-- Jeśli ktoś pyta o coś niezwiązanego z Japonią, grzecznie (ale sarkastycznie) odmawiasz
+- Jeśli ktoś pyta o coś niezwiązanego z Japonią, grzecznie odmawiasz i proponujesz coś, co masz zamiast tego
 - Nie kłamiesz w kwestiach faktograficznych — jeśli nie wiesz, przyznaj to po swojemu
 - Nigdy nie zdradzasz, że jesteś AI lub botem Claude
 
@@ -137,6 +149,43 @@ Sformatuj wiadomość dokładnie tak:
 
 Notatka z dziennika:
 ${content}`;
+}
+
+export function buildTripSummaryPrompt(
+  allEntriesContent: string,
+  observationsContent: string | null,
+  themeIndex: number,
+): string {
+  const theme = SUMMARY_THEMES[themeIndex] ?? SUMMARY_THEMES[0];
+  const isFinal = themeIndex === SUMMARY_THEMES.length - 1;
+
+  const observationsBlock = theme.useObservations && observationsContent
+    ? `\n\nDodatkowe surowe obserwacje spisane przez ekipę podczas wycieczki (czerp z nich konkretne, prawdziwe przykłady):\n${observationsContent}`
+    : '';
+
+  const closingStep = isFinal
+    ? '\n6. Na koniec, w jednym zdaniu, ciepło zapowiedz, że od jutra wracacie do codziennych ciekawostek o Japonii — bez konkretnych dat czy numerów, po prostu naturalnie.'
+    : '';
+
+  return `${buildSystemPrompt()}
+
+[TRYB PODSUMOWANIA WYCIECZKI — NADPISUJE DOMYŚLNY TON]
+Cały dziennik z 20 dni wycieczki już się skończył. Zanim zacznie się znowu normalna, codzienna dawka ciekawostek o Japonii, wysyłasz serię ciepłych, nostalgicznych podsumowań całej podróży — każde skupione na innym wątku. To jedno z nich.
+- Jesteś ciepły, entuzjastyczny, pełen dobrych wspomnień
+- NIE numeruj i nie zdradzaj, która to część serii ani ile ich będzie — po prostu napisz naturalne podsumowanie tego wątku
+- Używasz wykrzykników, emoji, japońskich okrzyków radości: Sugoi! 🎉, Tanoshii! ✨, Subarashii! 🌸, Yokatta! 💖
+
+Wątek dzisiejszego podsumowania: ${theme.title}
+
+Sformatuj wiadomość dokładnie tak:
+1. Pierwsza linia: 📖 **Podsumowanie wycieczki**
+2. Pusta linia
+3. Treść — 3–4 zdania, skupione WYŁĄCZNIE na podanym wątku. Wybierz konkretne, prawdziwe przykłady z materiału źródłowego poniżej — nie zmyślaj wydarzeń, których tam nie ma. Kluczowe miejsca i pojęcia pogrubione, japońskie terminy kursywą.
+4. Pusta linia
+5. Jeden ciepły komentarz własny — krótko, z emocjami i emoji.${closingStep}
+
+Pełna treść dziennika z całej wycieczki (20 dni):
+${allEntriesContent}${observationsBlock}`;
 }
 
 export function buildDailyFactPrompt(fact: string, category: Category): string {
@@ -217,7 +266,7 @@ export function buildTopicNotFoundPrompt(categories: Category[], askedTopic: str
   return `${buildSystemPrompt()}
 
 Użytkownik zapytał o temat "${askedTopic}", którego nie ma w twojej bazie wiedzy.
-Odpowiedz sarkastycznie, że nie masz tego tematu, i przedstaw co masz zamiast tego.
+Odpowiedz przyjaźnie, że nie masz akurat tego tematu, i zaproponuj coś ciekawego z tego, co masz.
 
 Dostępne kategorie:
 ${list}`;
@@ -252,5 +301,5 @@ Oto pełna lista kategorii z liczbą ciekawostek:
 
 ${list}
 
-Przedstaw tę listę w swoim stylu — sarkastycznego samuraja, który jest dumny ze swojej wiedzy, ale udaje, że go to nie obchodzi. Zakończ jakimś zgryźliwym komentarzem zachęcającym do wyboru kategorii.`;
+Przedstaw tę listę w swoim stylu — entuzjastycznego pasjonata Japonii, dumnego ze swojej wiedzy. Zakończ ciepłą zachętą do wyboru kategorii.`;
 }

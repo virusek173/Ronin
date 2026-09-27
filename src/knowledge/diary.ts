@@ -62,6 +62,34 @@ export function diaryEntryCount(): number {
   return loadAllEntries().length;
 }
 
+// Number of extra days, appended after the real diary entries, used to post
+// a multi-part trip summary once the diary has played through in full —
+// before permanently switching over to regular daily facts.
+export const SUMMARY_DAYS = 8;
+
+export function getAllEntriesAsText(): string {
+  return loadAllEntries()
+    .map(e => `--- Dzień ${e.dayNumber} (${e.date}) ---\n${e.content}`)
+    .join('\n\n');
+}
+
+const OBSERVATIONS_FILENAME = 'Ogólne obserwacje w Japonii.md';
+
+// Freeform observation notes (etiquette, tech, daily life) kept alongside
+// the day-by-day diary but outside the YYYY.MM.DD naming convention, so the
+// regular loader skips them. Used as grounding material for summary days
+// about culture/technology so the bot doesn't have to invent details.
+export function loadGeneralObservations(): string | null {
+  try {
+    const filePath = path.join(config.diary.path, OBSERVATIONS_FILENAME);
+    if (!fs.existsSync(filePath)) return null;
+    return fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    logger.warn({ err }, 'Failed to read general observations file');
+    return null;
+  }
+}
+
 // Real calendar date of the last diary entry (i.e. when the trip actually
 // ended), used for phrasing like "wrócili X temu" — independent of the
 // looping day counter used to pick which entry to post.

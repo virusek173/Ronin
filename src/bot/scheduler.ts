@@ -7,14 +7,18 @@ import { ConversationContext } from "../ai/context";
 import {
   buildDailyFactPromptPostTrip,
   buildDailyMemoryPrompt,
+  buildTripSummaryPrompt,
 } from "../ai/prompts";
 import { askClaudeSimple } from "../ai/claude";
 import { config } from "../config";
 import {
   diaryEntryCount,
+  getAllEntriesAsText,
   loadDiaryEntry,
   loadDiaryOffset,
+  loadGeneralObservations,
   saveDiaryOffset,
+  SUMMARY_DAYS,
 } from "../knowledge/diary";
 
 export function startDailyScheduler(
@@ -44,26 +48,46 @@ export function startDailyScheduler(
         }
 
         // Persistent day counter: day 0 on first run, then +1 on every
-        // firing, wrapping back to 0 once the last entry is reached so the
-        // diary replays from the start in an endless loop.
+        // firing. Days 0..entryCount-1 are real diary entries, the next
+        // SUMMARY_DAYS are a multi-part trip summary, and once both are
+        // exhausted the counter is left alone — from then on it's regular
+        // daily facts, permanently (no looping back to the diary).
         const entryCount = diaryEntryCount();
+        const totalSpecialDays = entryCount > 0 ? entryCount + SUMMARY_DAYS : 0;
+
         let diaryEntry = null as ReturnType<typeof loadDiaryEntry>;
-        let dayOffset = -1;
-        if (entryCount > 0) {
-          dayOffset = loadDiaryOffset() % entryCount;
-          diaryEntry = loadDiaryEntry(dayOffset);
-          saveDiaryOffset((dayOffset + 1) % entryCount);
+        let summaryThemeIndex = -1;
+
+        if (totalSpecialDays > 0) {
+          const offset = loadDiaryOffset();
+          if (offset < totalSpecialDays) {
+            if (offset < entryCount) {
+              diaryEntry = loadDiaryEntry(offset);
+            } else {
+              summaryThemeIndex = offset - entryCount;
+            }
+            saveDiaryOffset(offset + 1);
+          }
         }
 
         let systemPrompt: string;
         if (diaryEntry) {
           logger.info(
-            { dayNumber: diaryEntry.dayNumber, dayOffset },
+            { dayNumber: diaryEntry.dayNumber },
             "Sending daily memory",
           );
           systemPrompt = buildDailyMemoryPrompt(
             diaryEntry.content,
             diaryEntry.dayNumber,
+          );
+        } else if (summaryThemeIndex >= 0) {
+          logger.info({ summaryThemeIndex }, "Sending trip summary");
+          const allEntriesText = getAllEntriesAsText();
+          const observations = loadGeneralObservations();
+          systemPrompt = buildTripSummaryPrompt(
+            allEntriesText,
+            observations,
+            summaryThemeIndex,
           );
         } else {
           const next = tracker.nextFact(categories);

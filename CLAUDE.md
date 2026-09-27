@@ -2,7 +2,7 @@
 
 ## What This Project Is
 
-A sarcastic Discord bot ("Ronin") that teaches a friend group about Japan before their trip. It sends a daily fun fact and responds to mentions/replies with Japan-related knowledge, powered by Claude API. All bot responses are in **Polish** with occasional Japanese phrases.
+A friendly Discord bot ("Ronin") that teaches a friend group about Japan and shares memories from their trip. It sends a daily message (trip diary replay, trip summary, or a fun fact, depending on phase) and responds to mentions/replies with Japan-related knowledge, powered by Claude API. All bot responses are in **Polish** with occasional Japanese phrases.
 
 ## Commands
 
@@ -19,7 +19,7 @@ npm run watch     # TypeScript watch mode (compile only)
 - **Config:** `src/config.ts` — reads `.env` via dotenv, all env vars validated at startup
 - **AI layer** (`src/ai/`):
   - `claude.ts` — Claude API wrapper using streaming (`messages.stream`), two functions: `askClaude` (with history) and `askClaudeSimple` (single prompt)
-  - `prompts.ts` — all system prompts and prompt builders. Bot personality is defined here (sarcastic samurai character). **All prompts are in Polish.**
+  - `prompts.ts` — all system prompts and prompt builders. Bot personality is defined here (warm, friendly, Japan-enthusiast character). **All prompts are in Polish.**
   - `context.ts` — `ConversationContext` class, stores per-channel message history in memory with TTL and size limits
 - **Bot layer** (`src/bot/`):
   - `client.ts` — Discord.js client setup with required intents

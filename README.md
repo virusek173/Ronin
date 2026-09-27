@@ -1,14 +1,15 @@
 # Ronin
 
-Sarcastic Discord bot about Japan. Sends daily trip memories on a loop instead of facts. Answers questions and holds contextual conversations — powered by Claude API.
+Friendly Discord bot about Japan. Replays the trip diary once, follows up with a multi-part trip summary, then settles into daily facts. Answers questions and holds contextual conversations — powered by Claude API.
 
 ---
 
 ## Features
 
-- **Daily morning message** — every day at 6:00 AM (Europe/Warsaw) the bot posts to a designated channel:
-  - **Trip memories** — posts one diary entry per day in chronological order, with an enthusiastic/celebratory tone. A persistent counter (`data/diary-offset.json`) starts at day 0 on first run and advances by one each firing; once the last entry is reached it wraps back to day 0 and replays the diary again, forever.
-  - **Fallback — daily facts**: if the `Dziennik/` directory is missing or empty, cycles through 224 facts across 8 categories instead. No repeats until all are exhausted.
+- **Daily morning message** — every day at 6:00 AM (Europe/Warsaw) the bot posts to a designated channel. A persistent counter (`data/diary-offset.json`) drives three sequential phases, never looping back once past them:
+  1. **Trip memories** — one diary entry per day, in chronological order, with an enthusiastic/celebratory tone.
+  2. **Trip summary** — once the diary is exhausted, 8 more days of themed retrospective posts (highlights, funny moments, food, scenery, culture, tech, surprises, a farewell note), each drawing on the full diary plus any freeform observation notes in `Dziennik/`.
+  3. **Daily facts** — after that (or from day one if `Dziennik/` is missing or empty), cycles through 224 facts across 8 categories, forever. No repeats until all are exhausted.
 - **Conversational interaction** — responds to `@Ronin` mentions or replies to its messages. Maintains per-channel conversation context.
 - **Category-specific facts** — `@Ronin tell me something about cuisine` draws a random fact from the matching category.
 - **Category list** — `@Ronin what categories do you have?` returns the full list with emoji and fact counts.
@@ -43,7 +44,9 @@ Daily memories are loaded from a local `Dziennik/` directory (gitignored — not
 YYYY.MM.DD Japonia dzień N.md
 ```
 
-The bot reads **full file content** for each entry and presents it through Claude with an enthusiastic tone. Files are sorted by date prefix. Which entry gets posted is tracked by a persistent day counter in `data/diary-offset.json`, not by calendar date: it starts at day 0 the first time the scheduler fires, advances by one on every firing, and wraps back to day 0 once the last entry is reached — so the diary loops indefinitely regardless of when it was started. Delete `data/diary-offset.json` to reset the cycle back to day 0.
+The bot reads **full file content** for each entry and presents it through Claude with an enthusiastic tone. Files are sorted by date prefix. Which entry gets posted is tracked by a persistent day counter in `data/diary-offset.json`, not by calendar date: it starts at day 0 the first time the scheduler fires and advances by one on every firing. Once all diary entries are exhausted it moves into the 8-day trip summary phase (see Features above), and once that's exhausted too, the counter is left alone — the bot has moved on to daily facts permanently. Delete `data/diary-offset.json` to restart the whole sequence from day 0.
+
+A file named `Ogólne obserwacje w Japonii.md` in `Dziennik/`, if present, is used as extra grounding material for the culture/technology summary days — plain observation notes, not tied to a specific day, so they're excluded from the day-by-day diary itself.
 
 ---
 
