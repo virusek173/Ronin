@@ -71,6 +71,7 @@ export function startDailyScheduler(
         }
 
         let systemPrompt: string;
+        let maxTokens = 400;
         if (diaryEntry) {
           logger.info(
             { dayNumber: diaryEntry.dayNumber },
@@ -89,6 +90,10 @@ export function startDailyScheduler(
             observations,
             summaryThemeIndex,
           );
+          // Summary prompts pull from the whole 20-day diary at once and
+          // tend to run longer than a single day's entry — give them more
+          // headroom so they don't get cut off mid-sentence.
+          maxTokens = 700;
         } else {
           const next = tracker.nextFact(categories);
           if (!next) {
@@ -103,7 +108,7 @@ export function startDailyScheduler(
           systemPrompt = buildDailyFactPromptPostTrip(fact, category);
         }
 
-        const response = await askClaudeSimple(systemPrompt, 400);
+        const response = await askClaudeSimple(systemPrompt, maxTokens);
 
         await channel.send(response);
         conversationContext.addAssistantMessage(channel.id, response);

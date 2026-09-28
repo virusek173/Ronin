@@ -180,7 +180,7 @@ Wątek dzisiejszego podsumowania: ${theme.title}
 Sformatuj wiadomość dokładnie tak:
 1. Pierwsza linia: 📖 **Podsumowanie wycieczki**
 2. Pusta linia
-3. Treść — 3–4 zdania, skupione WYŁĄCZNIE na podanym wątku. Wybierz konkretne, prawdziwe przykłady z materiału źródłowego poniżej — nie zmyślaj wydarzeń, których tam nie ma. Kluczowe miejsca i pojęcia pogrubione, japońskie terminy kursywą.
+3. Treść — **maksymalnie 3 zdania**. Wybierz TYLKO 2–3 najlepsze, konkretne przykłady z materiału źródłowego poniżej, skupione WYŁĄCZNIE na podanym wątku — nie próbuj wymienić wszystkiego z całej wycieczki, to ma być zwięzłe, nie encyklopedyczne. Nie zmyślaj wydarzeń, których nie ma w materiale. Kluczowe miejsca i pojęcia pogrubione, japońskie terminy kursywą.
 4. Pusta linia
 5. Jeden ciepły komentarz własny — krótko, z emocjami i emoji.${closingStep}
 

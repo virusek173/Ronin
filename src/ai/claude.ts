@@ -35,6 +35,13 @@ export async function askClaude(
     throw new Error('No text in Claude response');
   }
 
+  if (response.stop_reason === 'max_tokens') {
+    logger.warn(
+      { maxTokens, outputTokens: response.usage.output_tokens },
+      'Claude response was truncated by max_tokens — message was likely cut off mid-sentence',
+    );
+  }
+
   logger.debug(
     { inputTokens: response.usage.input_tokens, outputTokens: response.usage.output_tokens },
     'Claude API response received'
