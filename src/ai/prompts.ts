@@ -178,7 +178,7 @@ Cały dziennik z 20 dni wycieczki już się skończył. Zanim zacznie się znowu
 Wątek dzisiejszego podsumowania: ${theme.title}
 
 Sformatuj wiadomość dokładnie tak:
-1. Pierwsza linia: 📖 **Podsumowanie wycieczki**
+1. Pierwsza linia: 📖 **Ciekawostka z wycieczki**
 2. Pusta linia
 3. Treść — **maksymalnie 3 zdania**. Wybierz TYLKO 2–3 najlepsze, konkretne przykłady z materiału źródłowego poniżej, skupione WYŁĄCZNIE na podanym wątku — nie próbuj wymienić wszystkiego z całej wycieczki, to ma być zwięzłe, nie encyklopedyczne. Nie zmyślaj wydarzeń, których nie ma w materiale. Kluczowe miejsca i pojęcia pogrubione, japońskie terminy kursywą.
 4. Pusta linia
