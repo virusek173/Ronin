@@ -6,6 +6,7 @@ import { FactTracker } from '../../knowledge/tracker';
 import { ConversationContext } from '../../ai/context';
 import { askClaudeSimple } from '../../ai/claude';
 import { buildGreetingPrompt } from '../../ai/prompts';
+import { getUnannouncedChanges, saveLastAnnouncedId } from '../../knowledge/changelog';
 import { config } from '../../config';
 
 export function registerReadyEvent(
@@ -23,8 +24,10 @@ export function registerReadyEvent(
     try {
       const channel = await client.channels.fetch(config.discord.dailyChannelId);
       if (channel instanceof TextChannel) {
-        const greeting = await askClaudeSimple(buildGreetingPrompt(), 200);
+        const { entries, latestId } = getUnannouncedChanges();
+        const greeting = await askClaudeSimple(buildGreetingPrompt(entries.map(e => e.text)), 500);
         await channel.send(greeting);
+        if (entries.length > 0 && latestId !== null) saveLastAnnouncedId(latestId);
         conversationContext.addAssistantMessage(channel.id, greeting);
         conversationContext.addChannelMessage(channel.id, client.user!.displayName, greeting);
       }

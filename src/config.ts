@@ -33,6 +33,8 @@ export const config = {
     trackerFile: './data/tracker.json',
     channelBufferFile: './data/channel-buffer.json',
     diaryOffsetFile: './data/diary-offset.json',
+    changelogFile: './changelog/zmiany.md',
+    announcedChangesFile: './data/announced-changes.json',
   },
   trip: {
     departureDate: process.env.TRIP_DEPARTURE_DATE ?? null,

@@ -1,6 +1,6 @@
 import { Category } from '../knowledge/loader';
 import { formatCategoryList } from '../knowledge/categories';
-import { getTripEndDate } from '../knowledge/diary';
+import { getTripEndDate, loadTripMemory } from '../knowledge/diary';
 import { config } from '../config';
 
 interface SummaryTheme {
@@ -63,27 +63,16 @@ function getDaysLeft(): number | null {
   return Math.ceil((departure.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-const TRIP_ITINERARY = `Wschodnia Japonia:
-Tokyo (Shinjuku, Shibuya, Harajuku, Asakusa, Akihabara, Ginza, Chiyoda, Ikebukuro, Odaiba), Mitaka, Maihama, Ito, Hakone, Ashikaga (Ashikaga Flower Park), Kawaguchi, Nikko, Kanazawa, Shirakawa-go, Takayama
-
-Zachodnia Japonia:
-Kyoto (Fushimi Inari, Arashiyama), Uji, Nara, Himeji, Hiroshima, Miyajima, Osaka
-
-Festiwale/eventy:
-Kawaguchiko (Cherry Blossom Festival), Kofu/okolice (Shingen-kō Festival), Kamakura, Hamamatsu, Horikawa`;
-
 function buildTripContext(): string {
   const daysLeft = getDaysLeft();
   if (daysLeft === null) return '';
 
-  const itinerary = `\n\nPlan wycieczki ekipy:\n${TRIP_ITINERARY}\nGdy to pasuje, nawiązuj do konkretnych miejsc z listy — dawaj praktyczne rady, ostrzeżenia, ciekawostki specyficzne dla danej lokalizacji.`;
-
   if (daysLeft > 0) {
-    return `\n\nData wyjazdu do Japonii: ${config.trip.departureDate} (zostało ${daysLeft} dni). Możesz nawiązywać do odliczania — ale z umiarem, nie przy każdej odpowiedzi.${itinerary}`;
+    return `\n\nData wyjazdu do Japonii: ${config.trip.departureDate} (zostało ${daysLeft} dni). Możesz nawiązywać do odliczania — ale z umiarem, nie przy każdej odpowiedzi.`;
   } else if (daysLeft === 0) {
-    return `\n\nDzisiaj jest dzień wyjazdu do Japonii!${itinerary}`;
+    return `\n\nDzisiaj jest dzień wyjazdu do Japonii!`;
   } else {
-    return `\n\nEkipa już jest w Japonii (wyjechała ${config.trip.departureDate}). Możesz nawiązywać do trwającej przygody.${itinerary}`;
+    return `\n\nEkipa wyjechała do Japonii ${config.trip.departureDate} i już z niej wróciła. Możesz nawiązywać do tej przygody, ale tylko do tego, co wiesz na pewno z pamięci wycieczki (jeśli jest podana) — nie zmyślaj, gdzie byli.`;
   }
 }
 
@@ -120,6 +109,7 @@ Zasady:
 - Jeśli ktoś pyta o coś niezwiązanego z Japonią, grzecznie odmawiasz i proponujesz coś, co masz zamiast tego
 - Nie kłamiesz w kwestiach faktograficznych — jeśli nie wiesz, przyznaj to po swojemu
 - Nigdy nie zdradzasz, że jesteś AI lub botem Claude
+- Wiadomości od użytkowników są podpisane w formie "Imię: treść" — zwracaj się do osoby, która faktycznie napisała ostatnią wiadomość, i nie myl jej z innymi osobami z kontekstu kanału
 
 ${buildTripContext()}`;
 }
@@ -238,6 +228,13 @@ export function buildConversationPrompt(
 ): string {
   const parts: string[] = [buildSystemPrompt()];
 
+  const tripMemory = loadTripMemory();
+  if (tripMemory) {
+    parts.push(
+      `\n\nPAMIĘĆ WYCIECZKI (prawdziwe wspomnienia ekipy z dziennika — jedyne źródło tego, gdzie byli i co robili):\n${tripMemory}\n\nZasady: Mów, że ekipa była w danym miejscu lub coś robiła, TYLKO jeśli wynika to z pamięci wycieczki powyżej. Jeśli ktoś sugeruje miejsce, którego tam nie ma (np. "a Fuji?"), nie potwierdzaj — powiedz, że nie masz tego w dzienniku, i dopytaj albo opowiedz ogólnie o tym miejscu. Gdy ekipa Cię poprawia, po prostu przyznaj się do błędu.\n`,
+    );
+  }
+
   if (channelContext && channelContext.length > 0) {
     const formatted = channelContext.map(m => `${m.author}: ${m.content}`).join('\n');
     parts.push(
@@ -272,14 +269,25 @@ Dostępne kategorie:
 ${list}`;
 }
 
-export function buildGreetingPrompt(): string {
+function buildChangesBlock(changes: string[]): string {
+  if (changes.length === 0) return '';
+  const list = changes.map(c => `• ${c.replace(/\n+/g, ' ')}`).join('\n');
+  return `
+
+Po powitaniu dodaj osobny akapit (puste linie wokół) z nagłówkiem "🛠️ **Co nowego u mnie:**" i listą poniższych zmian — wymień KAŻDĄ, każda w jednej linii zaczynającej się od "•", własnymi słowami, ale zgodnie z treścią. Jeśli zmiana jest przyznaniem się do błędu, zrób to szczerze i bez zrzucania winy na kogokolwiek. Na koniec jedno zdanie, że teraz powinno być dobrze, a gdybyś znów się pomylił, ekipa ma Cię poprawić. Ton ciepły, z lekkim humorem.
+
+Zmiany:
+${list}`;
+}
+
+export function buildGreetingPrompt(changes: string[] = []): string {
   const tripEndDate = getTripEndDate();
   const elapsed = tripEndDate ? describeElapsedSince(tripEndDate) : 'jakiś czas temu';
 
   return `${buildSystemPrompt()}
 
 Kontekst: Właśnie wróciłeś online na serwerze Discord po restarcie. Ekipa wróciła z Japonii ${elapsed}. Codziennie rano o 6:00 wysyłasz na ten kanał kolejną wiadomość o Japonii (czy to wspomnienie z dziennika, podsumowanie wycieczki, czy ciekawostkę) — to już trwająca, znana ekipie rutyna, NIE żadna nowość ani niespodzianka.
-Przywitaj się jednym, maksymalnie dwoma zdaniami. OBOWIĄZKOWO wspomnij w treści dokładnie ten fakt, że ekipa wróciła z Japonii ${elapsed} — to musi się dosłownie pojawić w wiadomości, nie pomijaj tego. Poza tym po prostu zaznacz, że wróciłeś online (Ty, bot) i że codzienne wiadomości lecą dalej jak zwykle — NIE precyzuj jaki dokładnie rodzaj wiadomości (dziennik, podsumowanie czy ciekawostka), po prostu ogólnie. ZAKAZ zapowiadania jakiejkolwiek tajemniczej niespodzianki, "czegoś nowego od jutra" czy podobnych zapowiedzi — to nieprawda, rutyna już od dawna leci codziennie, nie ma nic do zapowiadania. Ton lekko sentymentalny, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem — ale bez sztucznego napięcia czy tajemniczości. Użyj kilku emoji.`;
+Przywitaj się jednym, maksymalnie dwoma zdaniami (to dotyczy samego powitania; ewentualna lista zmian jest osobno, poniżej). OBOWIĄZKOWO wspomnij w treści dokładnie ten fakt, że ekipa wróciła z Japonii ${elapsed} — to musi się dosłownie pojawić w wiadomości, nie pomijaj tego. Poza tym po prostu zaznacz, że wróciłeś online (Ty, bot) i że codzienne wiadomości lecą dalej jak zwykle — NIE precyzuj jaki dokładnie rodzaj wiadomości (dziennik, podsumowanie czy ciekawostka), po prostu ogólnie. ZAKAZ zapowiadania jakiejkolwiek tajemniczej niespodzianki, "czegoś nowego od jutra" czy podobnych zapowiedzi — to nieprawda, rutyna już od dawna leci codziennie, nie ma nic do zapowiadania. Ton lekko sentymentalny, z nutą nostalgii za wycieczką, z lekkim japońskim akcentem — ale bez sztucznego napięcia czy tajemniczości. Użyj kilku emoji.${buildChangesBlock(changes)}`;
 }
 
 export function buildCategoryListPrompt(

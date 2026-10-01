@@ -30,6 +30,7 @@ npm run watch     # TypeScript watch mode (compile only)
   - `loader.ts` — parses `knowledge-base/*.md` files into `Category` objects. Each file has `# Kategoria: Name` header and `- fact` bullet points. Also contains `findCategoryByKeyword` with Polish stemming heuristic.
   - `categories.ts` — formatting helpers for category lists
   - `tracker.ts` — `FactTracker` persists to `data/tracker.json`, ensures no-repeat cycle through all 224 facts
+- **Changelog:** `changelog/zmiany.md` — hand-written, Polish list of user-facing changes (`## <id>` + 1–2 sentences). After a restart the greeting announces only entries newer than `lastId` in `data/announced-changes.json`. **When you fix or add something users will notice, append a new entry with the next id.** Image must be rebuilt (`make up`) for it to be picked up.
 - **Utils:** `src/utils/logger.ts` — pino logger
 
 ## Key Patterns

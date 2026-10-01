@@ -90,6 +90,29 @@ export function loadGeneralObservations(): string | null {
   }
 }
 
+const TRIP_MEMORY_DIRNAME = 'Pamiec';
+let cachedTripMemory: string | null | undefined;
+
+// Curated summaries (places, food, anecdotes, chronology) kept in a Pamiec/
+// subfolder of the diary. Gives the bot a trustworthy picture of what the
+// group really did, instead of leaning on a pre-trip plan.
+export function loadTripMemory(): string | null {
+  if (cachedTripMemory !== undefined) return cachedTripMemory;
+  try {
+    const dir = path.join(config.diary.path, TRIP_MEMORY_DIRNAME);
+    if (!fs.existsSync(dir)) return (cachedTripMemory = null);
+    const parts = fs.readdirSync(dir)
+      .filter(f => f.endsWith('.md'))
+      .sort()
+      .map(f => fs.readFileSync(path.join(dir, f), 'utf-8').trim());
+    cachedTripMemory = parts.length ? parts.join('\n\n') : null;
+  } catch (err) {
+    logger.warn({ err }, 'Failed to read trip memory files');
+    cachedTripMemory = null;
+  }
+  return cachedTripMemory;
+}
+
 // Real calendar date of the last diary entry (i.e. when the trip actually
 // ended), used for phrasing like "wrócili X temu" — independent of the
 // looping day counter used to pick which entry to post.

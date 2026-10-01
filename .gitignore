@@ -6,5 +6,6 @@ data/tracker.json
 .claude/
 data/channel-buffer.json
 data/diary-offset.json
+data/announced-changes.json
 Dziennik/
 *.swp

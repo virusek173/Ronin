@@ -227,6 +227,9 @@ export function registerMessageCreateEvent(
         }
       }
 
+      // Label the speaker so Claude doesn't guess who is writing from channel context
+      const labeledContent = `${message.author.displayName}: ${effectiveContent}`;
+
       // Build prompt and get conversation history
       const history = conversationContext.getHistory(channelId);
       const systemPrompt = buildConversationPrompt(
@@ -235,10 +238,10 @@ export function registerMessageCreateEvent(
         channelContext,
       );
 
-      const response = await askClaude(systemPrompt, history, effectiveContent, 600);
+      const response = await askClaude(systemPrompt, history, labeledContent, 600);
 
       // Update context
-      conversationContext.addUserMessage(channelId, effectiveContent);
+      conversationContext.addUserMessage(channelId, labeledContent);
       conversationContext.addAssistantMessage(channelId, response);
       conversationContext.addChannelMessage(
         channelId,
