@@ -19,7 +19,6 @@ RUN npm ci --omit=dev
 
 COPY --from=build /app/dist ./dist
 COPY knowledge-base/ ./knowledge-base/
-COPY changelog/ ./changelog/
 
 RUN mkdir -p data
 

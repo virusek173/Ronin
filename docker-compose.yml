@@ -6,3 +6,4 @@ services:
     volumes:
       - ./data:/app/data
       - ./Dziennik:/app/Dziennik:ro
+      - ./changelog:/app/changelog:ro
