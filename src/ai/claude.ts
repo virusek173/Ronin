@@ -4,6 +4,15 @@ import { logger } from '../utils/logger';
 
 const client = new Anthropic({ apiKey: config.anthropic.apiKey });
 
+// Sonnet 5.5 thinks before answering by default, and thinking tokens count
+// against max_tokens — with our small limits (20–600) the visible reply got
+// cut off or came back empty. This model rejects `thinking: disabled` and
+// wants `between_tools` instead, which turns pre-answer thinking off.
+// (The SDK types don't know this value yet, hence the cast.)
+function thinkingParams(): Record<string, unknown> {
+  return /-5-5/.test(config.anthropic.model) ? { thinking: { type: 'between_tools' } } : {};
+}
+
 export interface ClaudeMessage {
   role: 'user' | 'assistant';
   content: string;
@@ -27,7 +36,8 @@ export async function askClaude(
     max_tokens: maxTokens,
     system: systemPrompt,
     messages,
-  });
+    ...thinkingParams(),
+  } as Anthropic.MessageStreamParams);
 
   const response = await stream.finalMessage();
   const textBlock = response.content.find(b => b.type === 'text');
